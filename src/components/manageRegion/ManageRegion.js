@@ -26,6 +26,8 @@ class ManageRegion extends Component {
     axios
       .get(`/fv3/api/enable-project-cluster-sites/${projectId}/`)
       .then(res => {
+        console.log(res.data.cluster_sites, "cluster_sites");
+
         this.setState({
           cluster_sites: !res.data.cluster_sites,
           hide: res.data.cluster_sites

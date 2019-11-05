@@ -83,6 +83,7 @@ export default class SiteAdd extends Component {
         deleteConfirm
       }
     } = this.props;
+    // console.log(jsondata, "jsondata");
 
     return (
       <RightContentCard title=" Site Form">
