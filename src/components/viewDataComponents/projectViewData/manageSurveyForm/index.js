@@ -91,7 +91,7 @@ class ManageSurveyForm extends Component {
                     <DeleteTable
                       id={this.props.id}
                       deleted_forms={deleted_forms}
-                      loader={loader}
+                      loader={survey_forms_loader}
                     />
                   )}
                 </div>

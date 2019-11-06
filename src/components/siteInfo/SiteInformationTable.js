@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import uuid from "uuid/v4";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
 import Table from "../common/Table";
 import Modal from "../common/Modal";
 import RightContentCard from "../common/RightContentCard";
@@ -10,6 +12,8 @@ import CheckBox from "../common/CheckBox";
 import findQuestion from "../../utils/findQuestion";
 
 import isEmpty from "../../utils/isEmpty";
+import { errorToast } from "../../utils/toastHandler";
+import SortableSiteInfo from "./SortableSiteInfo";
 
 const pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
@@ -24,14 +28,16 @@ const INITIAL_STATE = {
   options: {},
   optInputField: [],
   selectedId: null,
-  selectedForm: {},
+  selectedForm: null,
   selectedQuestion: {},
   filteredQuestions: [],
   filteredMetaAttributes: [],
   selectedProject: {},
   tableQuestions: [],
   publicChecked: false,
-  dashboardChecked: false
+  dashboardChecked: false,
+  reOrder: false,
+  isReorderCancel: true
 };
 
 const questionTypes = [
@@ -45,17 +51,6 @@ const questionTypes = [
   { id: "FormSubCountQuestion", name: "Form submissions count" },
   { id: "FormQuestionAnswerStatus", name: "Form question answer status" }
 ];
-
-const tableHeader = {
-  siteInformationTable: [
-    "Attribute",
-    "Type",
-    "Form",
-    "Question",
-    "Project",
-    "Action"
-  ]
-};
 
 class SiteInformationTable extends Component {
   state = INITIAL_STATE;
@@ -213,8 +208,69 @@ class SiteInformationTable extends Component {
     }
   };
 
+  checkSelectedLength = filteredMetaAttributes => {
+    return filteredMetaAttributes.filter(attribute => attribute.checked).length;
+  };
+
+  validationHandler = () => {
+    const {
+      state: {
+        type,
+        options,
+        selectedForm,
+        selectedQuestion,
+        selectedProject,
+        filteredMetaAttributes
+      }
+    } = this;
+
+    if (type === "MCQ") {
+      if (Object.keys(options).length <= 0) {
+        errorToast("Please add options for this type.");
+        return false;
+      }
+    }
+
+    if (
+      type === "Form" ||
+      type === "FormSubStat" ||
+      type === "FormSubCountQuestion" ||
+      type === "FormQuestionAnswerStatus"
+    ) {
+      if (!selectedForm) {
+        errorToast("Please select a form.");
+        return false;
+      }
+    }
+
+    if (type === "Form" || type === "FormQuestionAnswerStatus") {
+      if (Object.keys(selectedQuestion).length <= 0) {
+        errorToast("Please select a question.");
+        return false;
+      }
+    }
+
+    if (type === "Link") {
+      if (!selectedProject) {
+        errorToast("Please select a project.");
+        return false;
+      }
+    }
+
+    if (this.checkSelectedLength(filteredMetaAttributes) <= 0) {
+      errorToast("Please select a attribute.");
+      return false;
+    }
+
+    return true;
+  };
+
   onSubmitHandler = e => {
     e.preventDefault();
+    const isValid = this.validationHandler();
+
+    if (!isValid) return;
+
     const {
       state: {
         label,
@@ -234,6 +290,7 @@ class SiteInformationTable extends Component {
         dashboardChecked
       }
     } = this;
+
     const { bind, children, ...restQuestion } = selectedQuestion;
 
     const question = {
@@ -425,7 +482,26 @@ class SiteInformationTable extends Component {
       () => this.props.siteInfoHandler(this.state.tableQuestions)
     );
   };
-
+  handleReorderToogle = () => {
+    this.setState(
+      {
+        reOrder: !this.state.reOrder,
+        isReorderCancel: !this.state.isReorderCancel
+      },
+      () => {
+        if (this.state.isReorderCancel) {
+          this.setState({ tableQuestions: this.props.jsonQuestions });
+        }
+      }
+    );
+  };
+  handleSave = () => {
+    this.props.handleSaveReorder(this.state.tableQuestions);
+    this.handleReorderToogle();
+  };
+  handleReOrder = list => {
+    this.setState({ tableQuestions: list });
+  };
   render() {
     const {
       props: { forms, terms, projects, jsonQuestions },
@@ -442,42 +518,87 @@ class SiteInformationTable extends Component {
         filteredQuestions,
         filteredMetaAttributes,
         tableQuestions,
-        showModal
+        showModal,
+        reOrder,
+        isReorderCancel
       },
-      removeInputHandler,
-      onSelectChangeHandler,
-      onInputChangeHandler,
-      questionChangeHandler,
-      formChangeHandler,
-      onSubmitHandler,
       removeQuestionHandler,
       editQuestionHandler,
-      generateOptField,
-      closeModal,
       toggleModal
     } = this;
+    const title = !isEmpty(terms)
+      ? `${terms.site} Information`
+      : "Site Information";
 
     return (
-      <Fragment>
-        <RightContentCard
-          title={
-            !isEmpty(terms) ? `${terms.site} Information` : "Site Information"
-          }
-          addButton
-          toggleModal={toggleModal}
-        >
-          <Table
-            tableHeader={tableHeader.siteInformationTable}
-            tableRow={tableQuestions}
-            page="siteInfo"
-            removeHandler={removeQuestionHandler}
-            editHandler={editQuestionHandler}
-            forms={forms}
-          />
-        </RightContentCard>
+      <>
+        <div className="card">
+          <div className="card-header main-card-header">
+            <h5>{title}</h5>
+            <div className="add-btn outline-btn">
+              {tableQuestions && tableQuestions.length > 1 && (
+                <a
+                  className="pending"
+                  data-tab="addSubStage-popup"
+                  onClick={this.handleReorderToogle}
+                >
+                  {!reOrder ? (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Reorder</Tooltip>}
+                    >
+                      <span className="reorder">
+                        <i className="la la-ellipsis-v" />
+                        <i className="la la-ellipsis-v" />
+                      </span>
+                    </OverlayTrigger>
+                  ) : (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Cancel</Tooltip>}
+                    >
+                      <span>
+                        <i className="la la-close" />
+                      </span>
+                    </OverlayTrigger>
+                  )}
+                </a>
+              )}
+              {reOrder && (
+                <a data-tab="addSubStage-popup" onClick={this.handleSave}>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Save</Tooltip>}
+                  >
+                    <span>
+                      <i className="la la-save" />
+                    </span>
+                  </OverlayTrigger>
+                </a>
+              )}
+              <a onClick={toggleModal}>
+                <span>
+                  <i className="la la-plus" />
+                </span>
+              </a>
+            </div>
+          </div>
+          <div className="card-body">
+            <SortableSiteInfo
+              rowData={tableQuestions}
+              page="siteInfo"
+              removeHandler={removeQuestionHandler}
+              editHandler={editQuestionHandler}
+              forms={forms}
+              reOrder={reOrder}
+              isReorderCancel={isReorderCancel}
+              handleSaveReorder={this.handleReOrder}
+            />
+          </div>
+        </div>
         {showModal && (
-          <Modal title="Add Information" toggleModal={closeModal}>
-            <form className="floating-form" onSubmit={onSubmitHandler}>
+          <Modal title="Add Information" toggleModal={this.closeModal}>
+            <form className="floating-form" onSubmit={this.onSubmitHandler}>
               <InputElement
                 tag="input"
                 type="text"
@@ -487,14 +608,14 @@ class SiteInformationTable extends Component {
                 htmlFor="label"
                 value={label}
                 name="label"
-                changeHandler={onInputChangeHandler}
+                changeHandler={this.onInputChangeHandler}
               />
               <SelectElement
                 className="form-control"
                 label="Type"
                 options={questionTypes}
                 value={type ? type : null}
-                changeHandler={onSelectChangeHandler}
+                changeHandler={this.onSelectChangeHandler}
               />
               {(type === "Text" || type === "Number" || type === "Date") && (
                 <InputElement
@@ -506,7 +627,7 @@ class SiteInformationTable extends Component {
                   htmlFor="placeholder"
                   name="placeholder"
                   value={placeholder}
-                  changeHandler={onInputChangeHandler}
+                  changeHandler={this.onInputChangeHandler}
                 />
               )}
 
@@ -523,15 +644,18 @@ class SiteInformationTable extends Component {
                     htmlFor={`option${el.val}`}
                     required={true}
                     removeBtn
-                    removeHandler={() => removeInputHandler(el.val)}
+                    removeHandler={() => this.removeInputHandler(el.val)}
                     name={`option${el.val}`}
                     value={this.state.options[`option${el.val}`] || ""}
-                    changeHandler={e => onInputChangeHandler(e, "option")}
+                    changeHandler={e => this.onInputChangeHandler(e, "option")}
                   />
                 ))}
               {type === "MCQ" && (
                 <div className="form-group">
-                  <button className="fieldsight-btn" onClick={generateOptField}>
+                  <button
+                    className="fieldsight-btn"
+                    onClick={this.generateOptField}
+                  >
                     Option+
                   </button>
                 </div>
@@ -549,7 +673,7 @@ class SiteInformationTable extends Component {
                   htmlFor="helpText"
                   name="helpText"
                   value={helpText}
-                  changeHandler={onInputChangeHandler}
+                  changeHandler={this.onInputChangeHandler}
                 />
               )}
 
@@ -557,7 +681,7 @@ class SiteInformationTable extends Component {
                 <SelectElement
                   className="form-control"
                   options={projects}
-                  changeHandler={formChangeHandler}
+                  changeHandler={this.formChangeHandler}
                   value={selectedProject ? selectedProject : null}
                 />
               )}
@@ -566,10 +690,7 @@ class SiteInformationTable extends Component {
                   <PerfectScrollbar>
                     {this.state.filteredMetaAttributes.map(attribute => {
                       return (
-                        <div
-                          className="form-group"
-                          key={`${attribute.question_name}`}
-                        >
+                        <div className="form-group" key={attribute.id}>
                           <CheckBox
                             checked={attribute.checked}
                             label={attribute.question_name}
@@ -591,7 +712,7 @@ class SiteInformationTable extends Component {
                   className="form-control"
                   options={forms}
                   value={selectedForm ? selectedForm : null}
-                  changeHandler={formChangeHandler}
+                  changeHandler={this.formChangeHandler}
                 />
               )}
 
@@ -601,7 +722,7 @@ class SiteInformationTable extends Component {
                     className="form-control"
                     options={filteredQuestions}
                     value={selectedQuestion.name ? selectedQuestion.name : null}
-                    changeHandler={questionChangeHandler}
+                    changeHandler={this.questionChangeHandler}
                   />
                 )}
               {/* <div className="form-group display-inline text-center">
@@ -625,7 +746,7 @@ class SiteInformationTable extends Component {
             </form>
           </Modal>
         )}
-      </Fragment>
+      </>
     );
   }
 }

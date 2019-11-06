@@ -97,7 +97,7 @@ class ManageScheduledForm extends Component {
                     <DeleteTable
                       deleted_forms={deleted_forms}
                       id={this.props.id}
-                      loader={loading}
+                      loader={scheduled_loading}
                     />
                   )}
                 </div>

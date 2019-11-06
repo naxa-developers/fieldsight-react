@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
+const Dotenv = require("dotenv-webpack");
 const APP_DIR = path.resolve(__dirname, "../src");
 
 module.exports = env => {
@@ -14,8 +15,7 @@ module.exports = env => {
     {
       entry: ["@babel/polyfill", APP_DIR],
       output: {
-        // To run locally use publicPath: "/"
-        publicPath: "/static/"
+        publicPath: PLATFORM === "production" ? "/static/" : "/"
       },
       module: {
         rules: [
@@ -85,9 +85,10 @@ module.exports = env => {
           "process.env.PLATFORM": JSON.stringify(PLATFORM)
         }),
         new CopyWebpackPlugin([{ from: "src/static/" }]),
-        new DashboardPlugin()
+        new DashboardPlugin(),
+        new Dotenv()
       ],
-      devtool: "eval-source-map"
+      devtool: PLATFORM === "production" ? "" : "eval-source-map"
     }
   ]);
 };

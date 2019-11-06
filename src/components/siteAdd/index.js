@@ -64,7 +64,8 @@ export default class SiteAdd extends Component{
           site_types:[{name: '----', id: ""}],
           Selectedtypes:"",
           show:false,
-          jsdata:""
+          jsdata:"",
+         
        
       };
 
@@ -481,6 +482,7 @@ export default class SiteAdd extends Component{
       this._isMounted = false;
     }
     
+   
     
     render(){ 
      
@@ -522,10 +524,13 @@ export default class SiteAdd extends Component{
               regionselected,
               Selectedtypes
                }}=this;
+              
         return (
             <RightContentCard title="Site Form">
             <form className="edit-form" onSubmit={onSubmitHandler}>
+
               <div className="row">
+               
                 <div className="col-xl-4 col-md-6">
                   <InputElement
                     formType="editForm"

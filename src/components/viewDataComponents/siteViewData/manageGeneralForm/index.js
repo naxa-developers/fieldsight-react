@@ -105,7 +105,7 @@ class ManageGeneralForm extends Component {
                     <DeleteTable
                       deleted_forms={deleted_forms}
                       id={this.props.id}
-                      loader={loading}
+                      loader={generals_loading}
                     />
                   )}
                 </div>

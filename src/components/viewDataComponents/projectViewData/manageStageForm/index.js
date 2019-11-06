@@ -91,7 +91,7 @@ class ResponseStageForm extends Component {
                     <DeleteTable
                       id={this.props.id}
                       deleted_forms={deleted_forms}
-                      loader={loader}
+                      loader={stage_forms_loader}
                     />
                   )}
                 </div>

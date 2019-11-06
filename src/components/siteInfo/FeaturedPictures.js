@@ -5,6 +5,7 @@ import Modal from "../common/Modal";
 import InputElement from "../common/InputElement";
 import SelectElement from "../common/SelectElement";
 import findQuestion from "../../utils/findQuestion";
+import { errorToast } from "../../utils/toastHandler";
 
 const pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
@@ -12,7 +13,7 @@ const INITIAL_STATE = {
   showModal: false,
   label: "",
   type: "choose",
-  selectedForm: {},
+  selectedForm: null,
   selectedQuestion: {},
   filteredQuestions: [],
   featuredPics: [],
@@ -67,6 +68,35 @@ class FeaturedPictures extends Component {
     });
   };
 
+  validationHandler = () => {
+    const {
+      state: {
+        label,
+        type,
+        editMode,
+        selectedForm,
+        selectedQuestion,
+        selectedId,
+        featuredPics
+      },
+      props: { sitePicHandler }
+    } = this;
+
+    if (type === "Form") {
+      if (!selectedForm) {
+        errorToast("Please select a form.");
+        return false;
+      }
+
+      if (Object.keys(selectedQuestion).length <= 0) {
+        errorToast("Please select a question.");
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   onSubmitHandler = e => {
     e.preventDefault();
     const {
@@ -81,6 +111,10 @@ class FeaturedPictures extends Component {
       },
       props: { sitePicHandler }
     } = this;
+
+    const isValid = this.validationHandler();
+
+    if (!isValid) return;
 
     const picture = {
       ...(!editMode && { id: uuid() }),
@@ -231,7 +265,7 @@ class FeaturedPictures extends Component {
           <div className="row">
             {featuredPics.map(pic => (
               <FeaturedPicturesCard
-                key={pic.question_name}
+                key={pic.id}
                 picture={pic}
                 editPicHandler={editPicHandler}
                 removePicHandler={removePicHandler}

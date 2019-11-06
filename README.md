@@ -14,6 +14,10 @@ Install the dependencies using npm
 
     npm install
 
+## Initial Setup For Develpment
+
+Add .env file at the root of the folder (use .env.sample file as reference)
+
 ## Development server
 
 Run `npm start` for a dev server. Navigate to `http://localhost:8080/`. The app will automatically reload if you change any of the source files.

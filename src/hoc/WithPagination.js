@@ -138,7 +138,6 @@ const withPagination = WrappedComponent => {
           ) {
             return (
               <li key={number} className={classes}>
-                {" "}
                 <a onClick={e => this.paginationHandler(number, null, payload)}>
                   {number}
                 </a>
