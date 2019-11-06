@@ -724,27 +724,40 @@ class StagedForms extends Component {
     });
   };
 
-  handleDeleteAllSubstages = toDeploy => {
+  handleDeleteStage = () => {
     const { id, stageId, isProjectForm } = this.state;
     this.setState({ loadReq: true }, () => {
       const deleteAllSubstageUrl = !!isProjectForm
         ? `fv3/api/manage-forms/delete/?project_id=${id}&type=stage&id=${stageId}`
         : `fv3/api/manage-forms/delete/?site_id=${id}&type=stage&id=${stageId}`;
       axios
-        .post(deleteAllSubstageUrl, {
-          is_deployed: toDeploy
-        })
+        .post(deleteAllSubstageUrl)
         .then(res => {
-          if (!!res.data)
-            this.setState(
-              {
-                subStageData: [],
-                loadReq: false
-              },
-              () => {
-                successToast("Deleted", "successfully");
+          this.setState(
+            state => {
+              const data = this.state.data;
+              if (res.data.message == "success") {
+                return {
+                  data: data.filter(each => each.id != stageId),
+                  loadReq: false
+                };
               }
-            );
+            },
+            () => {
+              successToast("Deleted", "successfully");
+            }
+          );
+
+          // if (!!res.data)
+          //   this.setState(
+          //     {
+          //       subStageData: [],
+          //       loadReq: false
+          //     },
+          //     () => {
+          //       successToast("Deleted", "successfully");
+          //     }
+          //   );
         })
         .catch(err => {
           this.setState({ loadReq: false }, () => {
@@ -846,6 +859,7 @@ class StagedForms extends Component {
     } = this;
     let deployCount = 0;
     let canReorder = "";
+    let canDeleteStage = "";
 
     data.map(each => {
       deployCount += each.undeployed_count;
@@ -865,6 +879,17 @@ class StagedForms extends Component {
           : true
         : "";
 
+    const arrDelete =
+      subStageData.length > 0 &&
+      subStageData.map(sub => {
+        if (sub.is_deployed) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    canDeleteStage =
+      arrDelete.length > 0 ? (arrDelete.indexOf(true) > -1 ? false : true) : "";
     return (
       <div className="col-xl-9 col-lg-8">
         <div className="card">
@@ -1009,7 +1034,7 @@ class StagedForms extends Component {
                 handleSaveSubstageReorder={this.handleSaveSubstageReorder}
                 handleNewSubstageOrder={this.handleNewSubstageOrder}
                 handleDeployAll={this.handleDeployAllSubstages}
-                handleDeleteAll={this.handleDeleteAllSubstages}
+                // handleDeleteAll={this.handleDeleteStage}
                 isProjectForm={isProjectForm}
                 subStageReorderDisable={subStageReorderDisable}
               />
@@ -1037,6 +1062,8 @@ class StagedForms extends Component {
                 typeOptions={typeOptions}
                 handleSubmit={this.handleSubmitStageForm}
                 stageData={selectedStage}
+                canDeleteStage={canDeleteStage}
+                handleDeleteStage={this.handleDeleteStage}
               />
             </Modal>
           )}

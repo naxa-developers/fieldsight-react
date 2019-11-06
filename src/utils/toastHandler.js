@@ -15,3 +15,11 @@ export const errorToast = error =>
     hideProgressBar: false,
     closeOnClick: true
   });
+
+export const warnToast = warn =>
+  toast.warn(`${warn}`, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true
+  });

@@ -247,22 +247,7 @@ class SortableStage extends Component {
                               </OverlayTrigger>
                             </a>
                           )}
-                          {/* {subStageData && subStageData.length > 0 && toDelete && (
-                      <a
-                        data-tab="addSubStage-popup"
-                        onClick={() => handleDeleteAll(true)}
-                      >
-                        {/* Delete Substages */}
-                          {/*                         
-                        <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip>Delete Substage</Tooltip>}>
-                        <span>
-                          <i className="la la-trash" />
-                        </span>
-                    </OverlayTrigger>
-                      </a>
-                    )}  */}
+
                           {subStageData &&
                             subStageData.length > 0 &&
                             !toDeploy && (
