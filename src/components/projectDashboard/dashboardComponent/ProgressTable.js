@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Table from "react-bootstrap/Table";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -57,9 +57,12 @@ const ShowContentRow = ({
         {formUrl ? (
           <a className="pending table-profile" href={formUrl}>
             <i className="la la-eye"></i>
+
             {totalSubmissions == 0
               ? "No Submission"
-              : totalSubmissions + " Submission(s) "}
+              : totalSubmissions > 1
+              ? totalSubmissions + " Submission(s)"
+              : totalSubmissions + " Submission "}
           </a>
         ) : (
           {}
@@ -84,8 +87,8 @@ const ShowContentRow = ({
 const CheckCase = ({ sub, sn }) => {
   // if (sub.name) {
   return (
-    <>
-      <tr className="heading-row" key={`stage_${sn}`}>
+    <Fragment key={`stage_${sn}`}>
+      <tr className="heading-row">
         <td>{sn}</td>
         <td>{sub.name}</td>
         <td />
@@ -112,7 +115,7 @@ const CheckCase = ({ sub, sn }) => {
             />
           );
         })}
-    </>
+    </Fragment>
   );
   // }
 };

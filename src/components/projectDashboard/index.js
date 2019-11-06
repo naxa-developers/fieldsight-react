@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { FormattedMessage } from "react-intl";
 import withPagination from "../../hoc/WithPagination";
 
 import DashboardHeader from "./dashboardComponent/DashboardHeader";
@@ -21,6 +22,7 @@ import {
   getProgressTableData,
   getSurveyForm
 } from "../../actions/projectDashboardActions";
+import { LanguageContext } from "../../languageContext";
 
 const INITIAL_STATE = {
   activeTab: "site",
@@ -139,6 +141,7 @@ class ProjectDashboard extends React.Component {
       }
     );
   };
+
   render() {
     const {
       projectDashboard: {
@@ -174,6 +177,7 @@ class ProjectDashboard extends React.Component {
       }
     } = this.props;
     const { activeTab, showCropper, showGallery } = this.state;
+
     return (
       <>
         <nav aria-label="breadcrumb" role="navigation">
@@ -223,7 +227,7 @@ class ProjectDashboard extends React.Component {
                       className="fieldsight-btn left-icon"
                       target="_blank"
                     >
-                      <i className="la la-map" /> full map
+                      <i className="la la-map" /> Full map
                     </a>
                   </div>
                 </div>
@@ -484,6 +488,7 @@ class ProjectDashboard extends React.Component {
 const mapStateToProps = ({ projectDashboard }) => ({
   projectDashboard
 });
+ProjectDashboard.contextType = LanguageContext;
 export default compose(
   connect(
     mapStateToProps,

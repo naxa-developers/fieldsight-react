@@ -22,7 +22,7 @@ const CountCard = ({
             : countNumber === 0
             ? `No ${countName} submission`
             : `${countName} submission`}
-          {countNumber !== 0 && (
+          {countNumber !== 0 && countNumber > 1 && (
             <span style={{ textTransform: "lowercase" }}>(s)</span>
           )}
         </h6>

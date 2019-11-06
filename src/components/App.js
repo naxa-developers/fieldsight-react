@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import { compose } from "redux";
+import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { IntlProvider } from "react-intl";
 
 import setDefault from "../config";
 import Settings from "./settings/Settings";
@@ -36,10 +39,6 @@ import SubmissionData from "./viewDataComponents/projectViewData/SubmissionTable
 
 import ManageForms from "./manageForms";
 
-import en from "../translations/en";
-import np from "../translations/np";
-import messages from "../translations/messages";
-
 import store from "../store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -50,12 +49,24 @@ import "../css/line-awesome.min.css";
 import "../scss/style.scss";
 import "../css/custom.css";
 
+import messages_en from "../translations/en.json";
+import messages_ne from "../translations/ne.json";
+import SelectElement from "../components/common/SelectElement";
+
+const messages = {
+  ne: messages_ne,
+  en: messages_en
+};
+const language = navigator.language.split(/[-_]/)[0]; // language without region code
+const selectLanguage = [{ id: "en", name: "Eng" }, { id: "ne", name: "Nep" }];
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       height: 0,
-      region: false
+      region: false,
+      selectedLanguage: language
     };
   }
 
@@ -72,10 +83,11 @@ class App extends Component {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
   }
-
   render() {
+    const { selected } = this.props;
+
     return (
-      <Provider store={store}>
+      <IntlProvider locale={language} messages={messages[selected]}>
         <div id="fieldsight-new" className="fieldsight-new">
           <div id="main-container">
             <div className="container-fluid">
@@ -235,8 +247,17 @@ class App extends Component {
             </div>
           </div>
         </div>
-      </Provider>
+      </IntlProvider>
     );
   }
 }
-export default App;
+
+//export default App;
+const mapStateToProps = ({ teams }) => {
+  const { selected } = teams;
+
+  return {
+    selected
+  };
+};
+export default compose(connect(mapStateToProps))(App);

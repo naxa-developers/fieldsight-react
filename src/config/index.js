@@ -6,6 +6,7 @@ let tokenVal = window.token ? window.token : process.env.TOKEN;
 let baseURL = window.base_url
   ? window.base_url
   : "https://fieldsight.naxa.com.np/";
+// "https://app.fieldsight.org/";
 
 const setDefault = () => {
   axios.defaults.baseURL = baseURL;

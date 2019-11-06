@@ -558,7 +558,7 @@ export default class SiteAdd extends Component{
               {region.length>0 ?  (this.props.page==="CreateSite" || this.props.page==="subSite"?<div className="col-xl-4 col-md-6">
                 <SelectElement
                 className="form-control"
-                label="Regions"
+                label="Region"
                 options={region.length>0?region.map(region => region):region}
                 changeHandler={e => onSelectChangeHandler(e, "regions")}
                  value={regionselected && regionselected }
@@ -568,7 +568,7 @@ export default class SiteAdd extends Component{
        <div className="col-xl-4 col-md-6">
                 <SelectElement
                 className="form-control"
-                label="Types"
+                label=" Site Type"
                 options={site_types.length>0?site_types.map(region => region):site_types}
                 changeHandler={e => onSelectChangeHandler(e, "site_types")}
                 value={Selectedtypes}

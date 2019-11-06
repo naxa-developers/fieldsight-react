@@ -119,7 +119,6 @@ export default class TermAndLabel extends Component {
     if (!isEmpty(terms)) {
       this.setState({
         termsAndLabels: { ...terms, project: projectId }
-        // dotLoader: false
       });
     }
   }

@@ -3,13 +3,17 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { Table } from "react-bootstrap";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { getTeam } from "../../actions/teamAction";
+import { getTeam, getTranslate } from "../../actions/teamAction";
+import { FormattedMessage } from "react-intl";
+
+import SelectElement from "../common/SelectElement";
 
 class Teams extends Component {
   state = {
     results: [],
     masterresult: [],
-    count: ""
+    count: "",
+    selectedLanguage: "en"
   };
 
   componentDidMount() {
@@ -47,14 +51,44 @@ class Teams extends Component {
     }
   };
 
+  onLanguageChangeHandler = e => {
+    const { value } = e.target;
+    console.log("target", e.target.value, e.target.name);
+    this.props.getTranslate(value);
+    // this.setState(
+    //   {
+    //     selectedLanguage: value
+    //   },
+    //   ()=>this.props
+    // );
+  };
+
   render() {
     const { results } = this.state;
 
+    const selectLanguage = [
+      { id: "en", name: "Eng" },
+      { id: "ne", name: "Nep" }
+    ];
+    const { selected } = this.props;
     return (
       <>
         <div className="card">
+          <div>
+            {/*  <SelectElement
+              options={selectLanguage}
+              label="Select Language"
+              changeHandler={this.onLanguageChangeHandler}
+              value={selected}
+          />*/}
+          </div>
           <div className="card-header main-card-header sub-card-header">
             <h5>Team List</h5>
+            {/*<FormattedMessage
+              id="app.teams-heading"
+              defaultMessage="Team List"
+              description="Team List"
+            />*/}
             <div className="dash-btn">
               <form className="floating-form">
                 <div className="form-group mr-0">
@@ -64,7 +98,12 @@ class Teams extends Component {
                     onChange={e => this.handleChange(e)}
                     required
                   />
-                  <label htmlFor="input">Search</label>
+                  <label htmlFor="input">
+                    <FormattedMessage
+                      id="app.teams-search"
+                      defaultMessage="Search"
+                    />
+                  </label>
                   <i className="la la-search"></i>
                 </div>
               </form>
@@ -95,7 +134,8 @@ class Teams extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {results.length > 0 &&
+                    {results &&
+                      results.length > 0 &&
                       results.map((project, key) => {
                         return (
                           <tr key={key}>
@@ -152,15 +192,20 @@ class Teams extends Component {
 }
 
 const mapStateToProps = ({ teams }) => {
+  const { selected } = teams;
+  // console.log(teams, selected, "========");
+
   return {
-    teams
+    teams,
+    selected
   };
 };
 export default compose(
   connect(
     mapStateToProps,
     {
-      getTeam
+      getTeam,
+      getTranslate
     }
   )
 )(Teams);

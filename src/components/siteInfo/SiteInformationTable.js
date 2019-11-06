@@ -255,11 +255,11 @@ class SiteInformationTable extends Component {
         errorToast("Please select a project.");
         return false;
       }
-    }
 
-    if (this.checkSelectedLength(filteredMetaAttributes) <= 0) {
-      errorToast("Please select a attribute.");
-      return false;
+      if (this.checkSelectedLength(filteredMetaAttributes) <= 0) {
+        errorToast("Please select a attribute.");
+        return false;
+      }
     }
 
     return true;
@@ -406,6 +406,8 @@ class SiteInformationTable extends Component {
       }
     }
 
+    console.log("selected Table question", selectedTableQuestion);
+
     const question = {
       label: selectedTableQuestion.question_text,
 
@@ -456,7 +458,9 @@ class SiteInformationTable extends Component {
       const selectedForm = this.props.forms.find(
         form => form.id === +selectedTableQuestion.form_id
       );
-      if (selectedForm && selectedForm.length > 0) {
+
+      console.log("selected form", selectedForm);
+      if (selectedForm && Object.keys(selectedForm).length > 0) {
         filteredQuestions = findQuestion(selectedForm.json.children);
       }
     }
@@ -716,6 +720,8 @@ class SiteInformationTable extends Component {
                 />
               )}
 
+              {console.log("selectedQuestion", selectedQuestion)}
+              {console.log("filteredQuestions", filteredQuestions)}
               {(type === "Form" || type === "FormQuestionAnswerStatus") &&
                 filteredQuestions.length > 0 && (
                   <SelectElement

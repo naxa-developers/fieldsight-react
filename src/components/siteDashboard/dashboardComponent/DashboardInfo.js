@@ -19,9 +19,8 @@ const Array = ({ siteMetas, showContentLoader }) => {
         <PerfectScrollbar>
           <div className="info-wrap">
             <ul>
-              {console.log(siteMetas, "siteMetas")}
               {Object.entries(siteMetas).map(meta => {
-                if (meta[0] == "From_Another_Project") {
+                if (meta[1].children) {
                   const data =
                     meta[1].children && Object.entries(meta[1].children);
 

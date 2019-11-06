@@ -64,9 +64,13 @@ export const GET_LOGS = "GET_LOGS";
 
 //Teams
 export const GET_TEAMS = "GET_TEAMS";
+export const GET_TRANSLATION = "GET_TRANSLATION";
 
 //ProjectViewData
 export const GET_PROJECT_VIEW = "GET_PROJECT_VIEW";
 
 //SiteviewData
 export const GET_SITE_VIEW = "GET_SITE_VIEW";
+
+//Translation
+//export const GET_TRANSLATION = "GET_TRANSLATION";
