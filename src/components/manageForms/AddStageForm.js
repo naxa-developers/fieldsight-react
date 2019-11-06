@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 
 import InputElement from "../common/InputElement";
-import { DeleteModal, WarningModal } from "../common/DeleteModal";
-import { warnToast } from "../../utils/toastHandler";
+import { errorToast } from "../../utils/toastHandler";
 
 class AddStageForm extends Component {
   state = {
@@ -18,7 +17,6 @@ class AddStageForm extends Component {
     regionDropdown: [],
     typeDropdown: [],
     hasLoaded: false,
-    isDelete: false,
     warning: false
   };
   componentDidMount() {
@@ -113,19 +111,17 @@ class AddStageForm extends Component {
   toggleWarning = () => {
     this.setState({ warning: !this.state.warning }, () => {
       if (this.state.warning) {
-        warnToast(
+        errorToast(
           "You need to DELETE or UNDEPLOY all substages to proceed this action!"
         );
       }
     });
   };
   toggleDelete = () => {
-    this.setState({ isDelete: !this.state.isDelete }, () => {
-      if (this.props.canDeleteStage) this.props.handleDeleteStage();
-      else {
-        this.toggleWarning();
-      }
-    });
+    if (this.props.canDeleteStage) this.props.handleDeleteStage();
+    else {
+      this.toggleWarning();
+    }
   };
   render() {
     const {
@@ -133,9 +129,7 @@ class AddStageForm extends Component {
         regionDropdown,
         typeDropdown,
         form: { name, desc, selectedRegion, selectedType },
-        hasLoaded,
-        isDelete,
-        warning
+        hasLoaded
       },
       handleChange,
       handleSelectRegionChange,

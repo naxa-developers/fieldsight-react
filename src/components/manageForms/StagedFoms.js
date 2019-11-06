@@ -219,7 +219,8 @@ class StagedForms extends Component {
   handleClickEdit = stageData => {
     this.setState(
       {
-        selectedStage: stageData
+        selectedStage: stageData,
+        stageId: stageData.id
       },
       () => {
         this.props.commonPopupHandler();
@@ -229,7 +230,8 @@ class StagedForms extends Component {
   handleClearStageForm = () => {
     this.setState(
       {
-        selectedStage: {}
+        selectedStage: {},
+        stageId: ""
       },
       () => {
         this.props.closePopup();
@@ -744,20 +746,10 @@ class StagedForms extends Component {
               }
             },
             () => {
-              successToast("Deleted", "successfully");
+              this.handleClearStageForm();
+              successToast("Stage", "deleted");
             }
           );
-
-          // if (!!res.data)
-          //   this.setState(
-          //     {
-          //       subStageData: [],
-          //       loadReq: false
-          //     },
-          //     () => {
-          //       successToast("Deleted", "successfully");
-          //     }
-          //   );
         })
         .catch(err => {
           this.setState({ loadReq: false }, () => {
@@ -860,7 +852,6 @@ class StagedForms extends Component {
     let deployCount = 0;
     let canReorder = "";
     let canDeleteStage = "";
-
     data.map(each => {
       deployCount += each.undeployed_count;
     });
@@ -889,7 +880,13 @@ class StagedForms extends Component {
         }
       });
     canDeleteStage =
-      arrDelete.length > 0 ? (arrDelete.indexOf(true) > -1 ? false : true) : "";
+      selectedStage.undeployed_count == 0
+        ? true
+        : arrDelete.length > 0
+        ? arrDelete.indexOf(true) > -1
+          ? false
+          : true
+        : "";
     return (
       <div className="col-xl-9 col-lg-8">
         <div className="card">
