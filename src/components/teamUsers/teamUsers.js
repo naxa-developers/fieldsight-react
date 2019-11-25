@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -76,7 +77,13 @@ export default class TeamUser extends Component {
         <main id="main-content">
           <div className="card">
             <div className="card-header main-card-header sub-card-header">
-              <h5>Team Users</h5>
+              <h5>
+                {' '}
+                <FormattedMessage
+                  id="app.team-user"
+                  defaultMessage="Team Users"
+                />
+              </h5>
               <div className="dash-btn">
                 <form
                   className="floating-form"
@@ -84,7 +91,10 @@ export default class TeamUser extends Component {
                 >
                   <div className="form-group mr-0">
                     <label htmlFor="input">
-                      Search
+                      <FormattedMessage
+                        id="app.teams-search"
+                        defaultMessage="Search"
+                      />
                       <input
                         type="search"
                         className="form-control"
@@ -104,19 +114,39 @@ export default class TeamUser extends Component {
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>User Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
+                    <th>
+                      <FormattedMessage
+                        id="app.name"
+                        defaultMessage="Name"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.user-name"
+                        defaultMessage="User Name"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.email"
+                        defaultMessage="Email"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.role"
+                        defaultMessage="Role"
+                      />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user, key) => {
+                  {users.map((users, key) => {
                     return (
-                      <tr key={user.id}>
+                      <tr key={key}>
                         <td>
                           <a
-                            href={`/users/profile/${user.id}`}
+                            href={`/users/profile/${users.id}`}
                             className="pending table-profile"
                           >
                             <figure>

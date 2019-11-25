@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
 import YourTeamSideBar from './YourTeamSidebar';
 import ProfileTab from './ProfileTab';
 import RegionTable from './RegionTable';
@@ -342,7 +343,10 @@ class MyrolesMain extends Component {
                             this.rightTabOpen(e, 'site');
                           }}
                         >
-                          Sites
+                          <FormattedMessage
+                            id="app.regions"
+                            defaultMessage="Regions"
+                          />
                         </a>
                       </li>
                       <li className="nav-item">
@@ -361,7 +365,10 @@ class MyrolesMain extends Component {
                             this.rightTabOpen(e, 'region');
                           }}
                         >
-                          Regions
+                          <FormattedMessage
+                            id="app.sites"
+                            defaultMessage="Sites"
+                          />
                         </a>
                       </li>
                       <li className="nav-item">
@@ -380,7 +387,10 @@ class MyrolesMain extends Component {
                             this.rightTabOpen(e, 'submission');
                           }}
                         >
-                          Submissions
+                          <FormattedMessage
+                            id="app.submissions"
+                            defaultMessage="Submissions"
+                          />
                         </a>
                       </li>
                       <li className="nav-item">
@@ -399,7 +409,10 @@ class MyrolesMain extends Component {
                             this.rightTabOpen(e, 'map');
                           }}
                         >
-                          map
+                          <FormattedMessage
+                            id="app.map"
+                            defaultMessage="map"
+                          />
                         </a>
                       </li>
                     </ul>
@@ -510,14 +523,22 @@ class MyrolesMain extends Component {
           >
             <div className="guide">
               <p>
-                Hi,&nbsp;
+                <FormattedMessage id="app.hi" defaultMessage="Hi," />
+                &nbsp;
                 <span style={{ textTransform: 'capitalize' }}>
-                  {profile.fullname}
+                  {this.state.profile.fullname}
                 </span>
-                seems like you have no role yet.&nbsp;You can get
-                started by creating a team in FieldSight or contact
-                your FieldSight manager to invite you to join
-                projects.
+                <FormattedMessage
+                  id="app.noRole"
+                  defaultMessage="seems like you have no role yet."
+                />
+                &nbsp;
+                <FormattedMessage
+                  id="app.noRole2"
+                  defaultMessage="You can get started by
+                            creating a team in FieldSight or contact your FieldSight manager
+                            to invite you to join projects."
+                />
               </p>
             </div>
             <div className="warning-footer text-center">
@@ -529,7 +550,10 @@ class MyrolesMain extends Component {
                   display: 'inline-block',
                 }}
               >
-                Create Team
+                <FormattedMessage
+                  id="app.createTeam"
+                  defaultMessage="Create Team"
+                />
               </a>
               <a
                 tabIndex="0"
@@ -538,7 +562,10 @@ class MyrolesMain extends Component {
                 className="fieldsight-btn rejected-btn"
                 onClick={this.cancelHandler}
               >
-                Cancel
+                <FormattedMessage
+                  id="app.cancel"
+                  defaultMessage="Cancel"
+                />
               </a>
             </div>
           </Modal>

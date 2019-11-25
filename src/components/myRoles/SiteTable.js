@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import Table from 'react-bootstrap/Table';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -48,7 +49,12 @@ class SiteTable extends Component {
             <div>
               <ul style={{ position: 'relative', height: '650px' }}>
                 {site.length === 0 && (
-                  <p>You do not have any sites.</p>
+                  <p>
+                    <FormattedMessage
+                      id="app.noSites"
+                      defaultMessage="You do not have any sites."
+                    />
+                  </p>
                 )}
                 <PerfectScrollbar>
                   {site.length > 0 && (
@@ -58,24 +64,82 @@ class SiteTable extends Component {
                     >
                       <thead>
                         <tr>
-                          <th>Site Name</th>
-                          <th>id</th>
-                          <th>Role</th>
-                          <th>Region</th>
-                          <th>Type</th>
-                          <th>Progress</th>
-                          <th>Submissions</th>
-                          <th>Latest status</th>
-                          {profileId && <th>Action</th>}
+                          <th>
+                            <FormattedMessage
+                              id="app.site-name"
+                              defaultMessage="Site Name"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.id"
+                              defaultMessage="id"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.role"
+                              defaultMessage="Role"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.region"
+                              defaultMessage="Region"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.type"
+                              defaultMessage="Type"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.progress"
+                              defaultMessage="Progress"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.submissions"
+                              defaultMessage="Submissions"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.latest-status"
+                              defaultMessage="Latest status"
+                            />
+                          </th>
+                          {this.props.profileId && (
+                            <th>
+                              <FormattedMessage
+                                id="app.action"
+                                defaultMessage="Action"
+                              />
+                            </th>
+                          )}
                         </tr>
                       </thead>
 
                       <tbody>
-                        {site.map((item, i) => (
+                        {/*this.props.site.length === 0 && (
+                    <tr>
+                      <td>
+                        <p>No Form Data Available</p>
+                      </td>
+                    </tr>
+                  )*/}
+
+                        {this.props.site.map((item, i) => (
                           <tr key={i}>
                             <td>
                               <a
-                                href={`/fieldsight/application/#/site-dashboard/${item.id}`}
+                                href={
+                                  '/fieldsight/application/#/site-dashboard/' +
+                                  item.id
+                                }
                                 className="pending table-profile"
                               >
                                 <h5>{item.name}</h5>

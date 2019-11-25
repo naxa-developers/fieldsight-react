@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { FormattedMessage } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import FormShare from './formShare';
 import { DotLoader } from './Loader';
@@ -123,10 +124,32 @@ class MyformTable extends Component {
               >
                 <thead>
                   <tr>
-                    <th>Form Name</th>
-                    <th>Create Date</th>
-                    <th>Updated date</th>
-                    <th>Action</th>
+                    <th>
+                      <FormattedMessage
+                        id="app.form-name"
+                        defaultMessage="Form Name"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.create-date"
+                        defaultMessage="Create Date"
+                      />
+                    </th>
+                    <th>
+                      {' '}
+                      <FormattedMessage
+                        id="app.updatedDate"
+                        defaultMessage="Updated date"
+                      />
+                    </th>
+                    <th>
+                      {' '}
+                      <FormattedMessage
+                        id="app.action"
+                        defaultMessage="Action"
+                      />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

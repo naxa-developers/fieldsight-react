@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import DeleteModal from '../common/DeleteModal';
 
 const getStatus = value => {
@@ -70,7 +71,14 @@ const GetActionForProject = props => {
           >
             <OverlayTrigger
               placement="top"
-              overlay={<Tooltip>Undeploy</Tooltip>}
+              overlay={
+                <Tooltip>
+                  <FormattedMessage
+                    id="app.undeploy"
+                    defaultMessage="Undeploy"
+                  />
+                </Tooltip>
+              }
             >
               <i className="la la-rocket"> </i>
             </OverlayTrigger>
@@ -84,7 +92,14 @@ const GetActionForProject = props => {
             >
               <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip>Deploy</Tooltip>}
+                overlay={
+                  <Tooltip>
+                    <FormattedMessage
+                      id="app.deploy"
+                      defaultMessage="Deploy"
+                    />
+                  </Tooltip>
+                }
               >
                 <i className="la la-rocket"> </i>
               </OverlayTrigger>
@@ -97,7 +112,14 @@ const GetActionForProject = props => {
         >
           <OverlayTrigger
             placement="top"
-            overlay={<Tooltip>Edit</Tooltip>}
+            overlay={
+              <Tooltip>
+                <FormattedMessage
+                  id="app.edit"
+                  defaultMessage="Edit"
+                />
+              </Tooltip>
+            }
           >
             <i className="la la-edit"> </i>
           </OverlayTrigger>
@@ -111,7 +133,14 @@ const GetActionForProject = props => {
             >
               <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip>Delete</Tooltip>}
+                overlay={
+                  <Tooltip>
+                    <FormattedMessage
+                      id="app.delete"
+                      defaultMessage="Delete"
+                    />
+                  </Tooltip>
+                }
               >
                 <i className="la la-trash"> </i>
               </OverlayTrigger>
@@ -140,7 +169,14 @@ const GetActionForProject = props => {
           >
             <OverlayTrigger
               placement="top"
-              overlay={<Tooltip>Undeploy</Tooltip>}
+              overlay={
+                <Tooltip>
+                  <FormattedMessage
+                    id="app.undeploy"
+                    defaultMessage="Undeploy"
+                  />
+                </Tooltip>
+              }
             >
               <i className="la la-rocket"> </i>
             </OverlayTrigger>
@@ -154,27 +190,43 @@ const GetActionForProject = props => {
             >
               <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip>Deploy</Tooltip>}
+                overlay={
+                  <Tooltip>
+                    <FormattedMessage
+                      id="app.deploy"
+                      defaultMessage="Deploy"
+                    />
+                  </Tooltip>
+                }
               >
                 <i className="la la-rocket"> </i>
               </OverlayTrigger>
             </a>
           </span>
         )}
-        {!!item.site && (
+        {item.site && (
           <a
-            onClick={() => editAction(item)}
+            onClick={() => {
+              editAction(item);
+            }}
             className="pending td-edit-btn td-btn"
           >
             <OverlayTrigger
               placement="top"
-              overlay={<Tooltip>Edit</Tooltip>}
+              overlay={
+                <Tooltip>
+                  <FormattedMessage
+                    id="app.edit"
+                    defaultMessage="Edit"
+                  />
+                </Tooltip>
+              }
             >
               <i className="la la-edit"> </i>
             </OverlayTrigger>
           </a>
         )}
-        {!!item.site && !item.is_deployed && (
+        {item.site && !item.is_deployed && (
           <span>
             <a
               className="rejected td-edit-btn td-btn"
@@ -182,7 +234,14 @@ const GetActionForProject = props => {
             >
               <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip>Delete</Tooltip>}
+                overlay={
+                  <Tooltip>
+                    <FormattedMessage
+                      id="app.delete"
+                      defaultMessage="Delete"
+                    />
+                  </Tooltip>
+                }
               >
                 <i className="la la-trash"> </i>
               </OverlayTrigger>
@@ -252,7 +311,10 @@ class ScheduleFormTable extends Component {
     return (
       <>
         {!loader && data.length === 0 ? (
-          <div>No Form added yet.</div>
+          <FormattedMessage
+            id="app.noFormAddedYet."
+            defaultMessage="No Form added yet."
+          />
         ) : (
           <Table
             responsive="xl"
@@ -260,15 +322,45 @@ class ScheduleFormTable extends Component {
           >
             <thead>
               <tr>
-                <th>form title</th>
-                <th>Responses</th>
-                <th>Form Guide</th>
-                <th>assigned date</th>
-                <th>Default status</th>
-                <th>Action</th>
+                <th>
+                  <FormattedMessage
+                    id="app.form-title"
+                    defaultMessage="Form Title"
+                  />
+                </th>
+                <th>
+                  {' '}
+                  <FormattedMessage
+                    id="app.response"
+                    defaultMessage="Responses"
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    id="app.formGuide"
+                    defaultMessage="Form Guide"
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    id="app.assigned-date"
+                    defaultMessage="Assigned Date"
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    id="app.defaultStatus"
+                    defaultMessage="Default status"
+                  />
+                </th>
+                <th width="15%">
+                  <FormattedMessage
+                    id="app.action"
+                    defaultMessage="Action"
+                  />
+                </th>
               </tr>
             </thead>
-
             <tbody>
               {/* {!loader && data.length === 0 && (
                 <tr>

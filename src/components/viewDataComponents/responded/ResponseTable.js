@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
@@ -18,13 +19,44 @@ class ResponseTable extends PureComponent {
           <thead>
             <tr>
               <th style={{ width: '15%' }}>
-                {survey === 'true' ? 'Form Name' : 'Name'}
+                {survey === 'true' ? (
+                  <FormattedMessage
+                    id="app.form-name"
+                    defaultMessage="Form Name"
+                  />
+                ) : (
+                  <FormattedMessage
+                    id="app.name"
+                    defaultMessage="Name"
+                  />
+                )}{' '}
               </th>
 
-              <th>Submissions</th>
-              <th>Last Response On</th>
-              <th>Created Date</th>
-              <th style={{ width: '13%' }}>Action</th>
+              <th>
+                <FormattedMessage
+                  id="app.submissions"
+                  defaultMessage="Submissions"
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id="app.last-response-on"
+                  defaultMessage="Last Response On"
+                />
+              </th>
+              <th>
+                {' '}
+                <FormattedMessage
+                  id="app.created-date"
+                  defaultMessage="Created Date"
+                />
+              </th>
+              <th style={{ width: '13%' }}>
+                <FormattedMessage
+                  id="app.action"
+                  defaultMessage="Action"
+                />
+              </th>
             </tr>
           </thead>
 

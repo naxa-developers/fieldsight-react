@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import Modal from '../common/Modal';
 import SiteDocumentTable from './siteDocumentTable';
@@ -185,7 +186,15 @@ export default class SiteDocument extends Component {
               <div className="right-content">
                 <div className="card no-boxshadow">
                   <div className="card-header main-card-header">
-                    <h5>Site documents</h5>
+                    <h5>
+                      {' '}
+                      <h5>
+                        <FormattedMessage
+                          id="app.site-document"
+                          defaultMessage="Site documents"
+                        />
+                      </h5>
+                    </h5>
                     <div className="add-btn">
                       {show_button && (
                         <button

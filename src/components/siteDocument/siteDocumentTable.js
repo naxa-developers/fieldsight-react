@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
+
 /* eslint-disable react/prop-types  */
 /* eslint-disable react/no-array-index-key  */
 /* eslint-disable camelcase */
@@ -14,10 +16,24 @@ export default class SiteDocumentTable extends PureComponent {
       >
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Added Date</th>
-            <th>Action</th>
+            <th>
+              <FormattedMessage id="app.name" defaultMessage="Name" />
+            </th>
+            <th>
+              <FormattedMessage id="app.type" defaultMessage="Type" />
+            </th>
+            <th>
+              <FormattedMessage
+                id="app.added-date"
+                defaultMessage="Added Date"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="app.action"
+                defaultMessage="Action"
+              />
+            </th>
           </tr>
         </thead>
         <tbody>

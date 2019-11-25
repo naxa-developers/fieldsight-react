@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+// import { FormattedMessage } from "react-intl";
 import { DotLoader } from '../myForm/Loader';
 import Modal from '../common/Modal';
 import RightContentCard from '../common/RightContentCard';
@@ -517,7 +517,7 @@ class GeneralForms extends Component {
     return (
       <div className="col-xl-9 col-lg-8">
         <RightContentCard
-          title="General Forms"
+          title="app.generate-forms"
           addButton={true}
           toggleModal={commonPopupHandler}
           showText={true}

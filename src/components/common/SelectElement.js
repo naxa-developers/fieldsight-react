@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 const SelectElement = ({
   formType,
@@ -8,14 +9,21 @@ const SelectElement = ({
   changeHandler,
   value,
   classname,
+  translation,
 }) => {
   return (
     <div className={`form-group ${classname}`}>
-      {label && (
-        <label>
-          {label} {formType === 'editForm' && <sup>*</sup>}
-        </label>
-      )}
+      {label &&
+        (translation === true ? (
+          <label>
+            <FormattedMessage id={label} defaultMessage={label} />
+            {formType === 'editForm' && <sup>*</sup>}
+          </label>
+        ) : (
+          <label>
+            {label} {formType === 'editForm' && <sup>*</sup>}
+          </label>
+        ))}
       <div className="select-option">
         <select
           className={className}

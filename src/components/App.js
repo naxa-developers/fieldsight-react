@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -52,14 +51,18 @@ import '../css/line-awesome.min.css';
 import '../scss/style.scss';
 import '../css/custom.css';
 
-import messages_en from '../translations/en.json';
-import messages_ne from '../translations/ne.json';
+import en from '../translations/en.json';
+import ne from '../translations/ne.json';
 
 const messages = {
-  ne: messages_ne,
-  en: messages_en,
+  ne: ne,
+  en: en,
 };
-const language = navigator.language.split(/[-_]/)[0]; // language without region code
+// const language = navigator.language.split(/[-_]/)[0]; // language without region code
+// const selectLanguage = [
+//   { id: "en", name: "Eng" },
+//   { id: "ne", name: "Nep" }
+// ];
 
 class App extends Component {
   constructor(props) {
@@ -67,7 +70,10 @@ class App extends Component {
     this.state = {
       height: 0,
       region: false,
-      selectedLanguage: language,
+      // selectedLanguage: language,
+      selected: localStorage.getItem('selected')
+        ? localStorage.getItem('selected')
+        : '',
     };
   }
 
@@ -81,6 +87,12 @@ class App extends Component {
     window.addEventListener('resize', this.updateWindowDimensions);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selected !== this.state.selected) {
+      localStorage.setItem('selected', this.state.selected);
+    }
+  }
+
   updateWindowDimensions = () => {
     return (this.state.height = window.innerHeight - 181);
   };
@@ -89,7 +101,7 @@ class App extends Component {
     const { selected } = this.props;
 
     return (
-      <IntlProvider locale={language} messages={messages[selected]}>
+      <IntlProvider locale={selected} messages={messages[selected]}>
         <div id="fieldsight-new" className="fieldsight-new">
           <div id="main-container">
             <div className="container-fluid">

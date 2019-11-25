@@ -3,6 +3,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { BlockContentLoader } from '../common/Loader';
 /* eslint-disable react/prop-types  */
 
@@ -32,7 +33,12 @@ class YourTeamSideBar extends Component {
         <div className="left-sidebar new-sidebar sticky-top">
           <div className="card">
             <div className="card-header main-card-header">
-              <h5>Your Teams</h5>
+              <h5>
+                <FormattedMessage
+                  id="app.your-teams"
+                  defaultMessage="Your Teams"
+                />
+              </h5>
               {addPermission && (
                 <div className="add-btn">
                   <a
@@ -40,7 +46,11 @@ class YourTeamSideBar extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Add team
+                    <FormattedMessage
+                      id="app.addTeam"
+                      defaultMessage="Add team"
+                    />
+
                     <span>
                       <i className="la la-plus" />
                     </span>

@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import IdentityForm from './IdentityForm';
 import SiteInformationTable from './SiteInformationTable';
@@ -484,60 +485,56 @@ class SiteInformation extends Component {
               className="fieldsight-btn pull-right"
               onClick={onSubmitHandler}
             >
-              Save
+              <FormattedMessage id="app.save" defaultMessage="Save" />
             </button>
           </div>
         </RightContentCard>
         {isLoading && <Loader />}
         {showConfirmation && (
-          <Modal title="Warning" toggleModal={cancelHandler}>
-            <div className="warning">
-              <p>Are you sure you want to save the changes?</p>
-              <p>Please Note </p>
-              <ul style={{ textAlign: 'left' }}>
-                <li>
-                  Changing site information will change data in all
-                  the sites.
-                </li>
-                <li>
-                  Site pictures, featured images, locations, progress
-                  values and site information will be changed to the
-                  new preferences.
-                </li>
-                <li>
-                  Any information deleted will not be recovered later
-                  unless the same information is created again.
-                </li>
-                <li>
-                  Changes may take some time to reflect in the sites
-                  depending upon the total number of sites in the
-                  project and calculations/form answers if pulled in
-                  the information.
-                </li>
-              </ul>
-            </div>
-            <div className="warning-footer text-center">
-              <a
-                role="button"
-                onKeyDown={this.handleKeyDown}
-                tabIndex="0"
-                className="fieldsight-btn rejected-btn"
-                onClick={cancelHandler}
-                style={{ marginRight: '10px' }}
-              >
-                cancel
-              </a>
-              <a
-                role="button"
-                onKeyDown={this.handleKeyDown}
-                tabIndex="0"
-                className="fieldsight-btn"
-                onClick={confirmHandler}
-              >
-                confirm
-              </a>
-            </div>
-          </Modal>
+          <DeleteModel
+            onCancel={confirmHandler}
+            onConfirm={cancelHandler}
+            onToggle={cancelHandler}
+            message={`Are you sure you want to save the changes?`}
+            title="Warning"
+          >
+            <p>
+              <FormattedMessage
+                id="app.pleaseNote"
+                defaultMessage="Please Note"
+              />
+            </p>
+            <ul style={{ textAlign: 'left' }}>
+              <li>
+                <FormattedMessage
+                  id="app.changingSiteInfo"
+                  defaultMessage="Changing site information will change data in all the sites."
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id="app.siteMessage1"
+                  defaultMessage="Site pictures, featured images, locations, progress values and
+                site information will be changed to the new preferences."
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id="app.siteMessage2"
+                  defaultMessage="Any information deleted will not be recovered later unless the
+                same information is created again."
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id="app.siteMessage3"
+                  defaultMessage="Changes may take some time to reflect in the sites depending
+                upon the total number of sites in the project and
+                calculations/form answers if pulled in the information."
+                />
+              </li>
+            </ul>
+          </DeleteModel>
         )}
       </>
     );

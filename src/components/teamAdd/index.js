@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import L from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import PropTypes from 'prop-types';
@@ -244,11 +245,14 @@ class TeamAdd extends Component {
               className="breadcrumb-item active"
               aria-current="page"
             >
-              Create Team
+              <FormattedMessage
+                id="app.createTeam"
+                defaultMessage="Create Team"
+              />
             </li>
           </ol>
         </nav>
-        <RightContentCard title="New Team">
+        <RightContentCard title="app.newTeam">
           <form className="edit-form" onSubmit={onSubmitHandler}>
             <div className="row">
               <div className="col-xl-4 col-md-6">
@@ -257,16 +261,18 @@ class TeamAdd extends Component {
                   tag="input"
                   type="text"
                   required
-                  label=" Team Name"
+                  label="app.teamName"
                   name="teamName"
                   value={teamName}
                   changeHandler={onChangeHandler}
+                  translation
                 />
               </div>
               <div className="col-xl-4 col-md-6">
                 <SelectElement
                   className="form-control"
-                  label="Type of Team"
+                  label="app.typeOfTeam"
+                  translation
                   options={
                     teamTypes.length > 0
                       ? teamTypes.map(each => each)
@@ -284,10 +290,11 @@ class TeamAdd extends Component {
                   tag="input"
                   type="text"
                   required
-                  label="Contact Number: "
+                  label="app.contactNumber"
                   name="contactnumber"
                   value={contactnumber}
                   changeHandler={onChangeHandler}
+                  translation
                 />
               </div>
               <div className="col-xl-4 col-md-6">
@@ -296,10 +303,11 @@ class TeamAdd extends Component {
                   tag="input"
                   type="email"
                   required
-                  label="Email"
+                  label="app.email"
                   name="email"
                   value={email}
                   changeHandler={onChangeHandler}
+                  translation
                 />
               </div>
               <div className="col-xl-4 col-md-6">
@@ -308,10 +316,11 @@ class TeamAdd extends Component {
                     formType="editForm"
                     tag="input"
                     type="url"
-                    label="website"
+                    label="app.website"
                     name="website"
                     value={website}
                     changeHandler={onChangeHandler}
+                    translation
                   />
                 </div>
               </div>
@@ -321,16 +330,18 @@ class TeamAdd extends Component {
                   tag="input"
                   type="text"
                   required
-                  label="Address"
+                  label="app.address"
                   name="address"
                   value={address}
                   changeHandler={onChangeHandler}
+                  translation
                 />
               </div>
               <div className="col-xl-4 col-md-6">
                 <SelectElement
                   className="form-control"
-                  label="Country"
+                  label="app.country"
+                  translation
                   options={
                     country.length > 0
                       ? country.map(each => each)
@@ -349,10 +360,11 @@ class TeamAdd extends Component {
                     tag="input"
                     type="text"
                     required
-                    label="Description"
+                    label="app.description"
                     name="publicDescription"
                     value={publicDescription}
                     changeHandler={onChangeHandler}
+                    translation
                   />
                 </div>
               </div>
@@ -361,7 +373,10 @@ class TeamAdd extends Component {
               <div className="col-xl-4 col-md-6">
                 <div className="form-group">
                   <label htmlFor="map">
-                    Map
+                    <FormattedMessage
+                      id="app.map"
+                      defaultMessage="Map"
+                    />
                     <sup>*</sup>
                   </label>
 
@@ -378,7 +393,13 @@ class TeamAdd extends Component {
                       />
                       <Marker position={[latitude, longitude]}>
                         <Popup>
-                          <b>Name: </b>
+                          <b>
+                            <FormattedMessage
+                              id="app.name"
+                              defaultMessage="Name"
+                            />
+                            :{' '}
+                          </b>
                           {teamName}
                         </Popup>
                       </Marker>
@@ -389,8 +410,9 @@ class TeamAdd extends Component {
                           formType="editForm"
                           tag="input"
                           type="number"
+                          translation
                           required
-                          label="Latitude"
+                          label="app.latitude"
                           name="latitude"
                           value={latitude}
                           changeHandler={e => {
@@ -404,8 +426,9 @@ class TeamAdd extends Component {
                           formType="editForm"
                           tag="input"
                           type="number"
+                          translation
                           required
-                          label="Longitude"
+                          label="app.longitude"
                           name="longitude"
                           value={longitude}
                           changeHandler={e => {
@@ -421,8 +444,17 @@ class TeamAdd extends Component {
               <div className="col-xl-4 col-md-6">
                 <div className="form-group">
                   <label htmlFor="cropresult">
-                    {' '}
-                    {cropResult ? 'Preview' : 'Attach File'}
+                    {cropResult ? (
+                      <FormattedMessage
+                        id="app.preview"
+                        defaultMessage="Preview"
+                      />
+                    ) : (
+                      <FormattedMessage
+                        id="app.attatchFile"
+                        defaultMessage="Attach File"
+                      />
+                    )}
                   </label>
 
                   {cropResult ? (
@@ -450,7 +482,10 @@ class TeamAdd extends Component {
                                 type="button"
                                 className="fieldsight-btn"
                               >
-                                Upload
+                                <FormattedMessage
+                                  id="app.upload"
+                                  defaultMessage="Upload"
+                                />
                                 <i className="la la-cloud-upload" />
                               </button>
                             </div>
@@ -474,12 +509,17 @@ class TeamAdd extends Component {
                                       multiple={false}
                                     />
                                     <div className="upload-icon" />
-                                    <h3>Drag & Drop an image</h3>
-                                    <button
-                                      type="button"
-                                      className="fieldsight-btn"
-                                    >
-                                      Upload
+                                    <h3>
+                                      <FormattedMessage
+                                        id="app.drag&DropAnImage"
+                                        defaultMessage="Drag & Drop an image"
+                                      />
+                                    </h3>
+                                    <button className="fieldsight-btn">
+                                      <FormattedMessage
+                                        id="app.upload"
+                                        defaultMessage="Upload"
+                                      />
                                       <i className="la la-cloud-upload" />
                                     </button>
                                   </div>
@@ -499,7 +539,10 @@ class TeamAdd extends Component {
                   type="submit"
                   className="fieldsight-btn pull-right"
                 >
-                  Save
+                  <FormattedMessage
+                    id="app.save"
+                    defaultMessage="Save"
+                  />
                 </button>
               </div>
             </div>
@@ -526,7 +569,10 @@ class TeamAdd extends Component {
                         style={{ marginTop: '15px' }}
                         onClick={this.cropImage}
                       >
-                        Save Image
+                        <FormattedMessage
+                          id="app.saveImage"
+                          defaultMessage="Save Image"
+                        />
                       </button>
                     </figure>
                   </div>

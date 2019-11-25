@@ -4,7 +4,9 @@ import { GET_TEAMS, GET_TRANSLATION } from '../actions/types';
 const initialState = {
   teams: [],
   count: '',
-  selected: 'en',
+  selected:
+    localStorage.getItem('selected') &&
+    localStorage.getItem('selected'),
 };
 
 export default function(state = initialState, action) {
@@ -15,10 +17,13 @@ export default function(state = initialState, action) {
       return {
         teams: [...action.payload.results],
         count: action.payload.count,
+        selected: 'en',
       };
     case GET_TRANSLATION:
       return {
         selected: action.payload,
+        teams: state.teams,
+        count: state.count,
       };
 
     default:

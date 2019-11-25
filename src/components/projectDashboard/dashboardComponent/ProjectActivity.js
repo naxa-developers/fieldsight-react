@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 /* eslint-disable react/prop-types  */
 
 const getIcon = submission => {
@@ -21,7 +22,13 @@ const ShowAcitivity = props => (
       </div>
       <div className="count-content">
         <h4>{props.value}</h4>
-        <h6>{props.name}</h6>
+        {/*<h6>{props.name}</h6>*/}
+        <h6>
+          <FormattedMessage
+            id={props.id}
+            defaultMessage={props.name}
+          />
+        </h6>
       </div>
     </div>
   </div>
@@ -34,7 +41,13 @@ class ProjectActivity extends React.PureComponent {
       <div className="dashboard-counter mrt-30 bg-counter">
         <div className="card">
           <div className="card-header main-card-header sub-card-header">
-            <h5>Project activity</h5>
+            {/* <h5>Project activity</h5>*/}
+            <h5>
+              <FormattedMessage
+                id="app.project-activity"
+                defaultMessage="Progress table"
+              />
+            </h5>
           </div>
           <div className="card-body">
             <div className="row">
@@ -42,6 +55,7 @@ class ProjectActivity extends React.PureComponent {
                 type="approved"
                 name="Submissions In Last 7 Days"
                 value={projectActivity.submissions_in_last_7_days}
+                id="app.submission-in-last-7-days"
               />
               <ShowAcitivity
                 type="flagged"
@@ -49,11 +63,13 @@ class ProjectActivity extends React.PureComponent {
                 value={
                   projectActivity.active_supervisors_in_last_7_days
                 }
+                id="app.active-supervisor-in-last-7-days"
               />
               <ShowAcitivity
                 type="marker"
                 name="Site Visits In Last 7 Days"
                 value={projectActivity.site_visits_in_last_7_days}
+                id="app.site-visit-in-last-7-days"
               />
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PreviewModal from './PreviewModal';
 /* eslint-disable react/prop-types  */
@@ -34,7 +35,14 @@ class SharedFormShare extends Component {
         </td>
         <td>
           <OverlayTrigger
-            overlay={<Tooltip id="tooltip-disabled">Preview</Tooltip>}
+            overlay={
+              <Tooltip id="tooltip-disabled">
+                <FormattedMessage
+                  id="app.preview"
+                  defaultMessage="Preview"
+                />
+              </Tooltip>
+            }
           >
             <a
               onClick={e => {
@@ -65,7 +73,14 @@ class SharedFormShare extends Component {
             </a>
           </OverlayTrigger>
           <OverlayTrigger
-            overlay={<Tooltip id="tooltip-disabled">Edit</Tooltip>}
+            overlay={
+              <Tooltip id="tooltip-disabled">
+                <FormattedMessage
+                  id="app.edit"
+                  defaultMessage="Edit"
+                />
+              </Tooltip>
+            }
           >
             <a
               onClick={e => {
@@ -106,7 +121,12 @@ class SharedFormShare extends Component {
           </OverlayTrigger> */}
           <OverlayTrigger
             overlay={
-              <Tooltip id="tooltip-disabled">Download</Tooltip>
+              <Tooltip id="tooltip-disabled">
+                <FormattedMessage
+                  id="app.download"
+                  defaultMessage="download"
+                />
+              </Tooltip>
             }
           >
             <a

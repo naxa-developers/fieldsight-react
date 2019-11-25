@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import Table from '../common/Table';
 import Modal from '../common/Modal';
@@ -247,10 +248,22 @@ class SiteType extends Component {
       confirmHandler,
       context: { terms },
     } = this;
+    const informationDeclare = !isEmpty(terms)
+      ? `${terms.site} Type`
+      : 'Site Type';
     return (
       <>
         <RightContentCard
-          title={!isEmpty(terms) ? `${terms.site} Type` : 'Site Type'}
+          title={
+            !isEmpty(terms) ? (
+              `${terms.site} Type`
+            ) : (
+              <FormattedMessage
+                id="app.siteType"
+                defaultMessage="app.siteType"
+              />
+            )
+          }
           addButton
           toggleModal={toggleModal}
           hideButton
@@ -281,64 +294,45 @@ class SiteType extends Component {
                 tag="input"
                 type="text"
                 required
-                label="ID"
+                label="app.id"
                 formType="floatingForm"
                 htmlFor="input"
                 name="selectedIdentifier"
                 value={selectedIdentifier}
                 changeHandler={onChangeHandler}
+                translation={true}
               />
               <InputElement
                 tag="textarea"
                 type="text"
                 required
-                label="Type"
+                label="app.type"
                 formType="floatingForm"
                 htmlFor="textarea"
                 name="selectedName"
                 value={selectedName}
                 changeHandler={onChangeHandler}
+                translation
               />
               <div className="form-group pull-right no-margin">
                 <button type="submit" className="fieldsight-btn">
-                  Save
+                  <FormattedMessage
+                    id="app.save"
+                    defaultMessage="Save"
+                  />
                 </button>
               </div>
             </form>
           </Modal>
         )}
         {showDeleteConfirmation && (
-          <Modal title="Warning" toggleModal={cancelHandler}>
-            <div className="warning">
-              <i className="la la-exclamation-triangle" />
-
-              <p>
-                Are you sure you want to delete the
-                {!isEmpty(terms) ? `${terms.site} Type` : 'Site Type'}
-                ?
-              </p>
-            </div>
-            <div className="warning-footer text-center">
-              <a
-                role="button"
-                onKeyDown={this.handleKeyDown}
-                tabIndex="0"
-                className="fieldsight-btn rejected-btn"
-                onClick={cancelHandler}
-              >
-                cancel
-              </a>
-              <a
-                className="fieldsight-btn"
-                role="button"
-                onKeyDown={this.handleKeyDown}
-                tabIndex="0"
-                onClick={confirmHandler}
-              >
-                confirm
-              </a>
-            </div>
-          </Modal>
+          <Warning
+            onCancel={cancelHandler}
+            onConfirm={confirmHandler}
+            onToggle={cancelHandler}
+            message={`Are you sure you want to delete the ${informationDeclare} ?`}
+            title="Warning"
+          />
         )}
       </>
     );

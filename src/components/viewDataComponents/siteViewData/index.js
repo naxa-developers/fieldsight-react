@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -161,7 +162,13 @@ class SiteViewData extends Component {
               <div className="left-sidebar new-sidebar sticky-top">
                 <div className="card">
                   <div className="card-header main-card-header">
-                    <h5>View Data</h5>
+                    {/*<h5>View Data</h5>*/}
+                    <h5>
+                      <FormattedMessage
+                        id="app.view-data"
+                        defaultMessage="View Data"
+                      />
+                    </h5>
                   </div>
                   <div className="card-body">
                     <ManageFormSetting

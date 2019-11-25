@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { FormattedMessage } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { DotLoader } from '../../myForm/Loader';
 import isEmpty from '../../../utils/isEmpty';
@@ -39,17 +40,43 @@ class SiteListTable extends React.PureComponent {
                         {!isEmpty(terms) ? `${terms.site}` : 'Sites'}
                         Name
                       </th>
-                      <th>id</th>
-                      {/* <th>Address</th> */}
+
+                      <th>
+                        <FormattedMessage
+                          id="app.id"
+                          defaultMessage="id"
+                        />
+                      </th>
+
                       <th>
                         {!isEmpty(terms)
                           ? `${terms.region}`
                           : 'Region'}
                       </th>
-                      <th>Type</th>
-                      <th>Progress</th>
-                      <th>Submissions</th>
-                      <th>Latest status</th>
+                      <th>
+                        <FormattedMessage
+                          id="app.type"
+                          defaultMessage="Type"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.progress"
+                          defaultMessage=" Progress"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.submissions"
+                          defaultMessage="Submissions"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.latest-status"
+                          defaultMessage="Latest status"
+                        />
+                      </th>
                     </tr>
                   </thead>
 
@@ -57,7 +84,12 @@ class SiteListTable extends React.PureComponent {
                     {!loader && data.length === 0 && (
                       <tr>
                         <td colSpan={7}>
-                          <p>No Form Data Available</p>
+                          <p>
+                            <FormattedMessage
+                              id="app.noFormDataAvailable"
+                              defaultMessage="No Form Data Available"
+                            />
+                          </p>
                         </td>
                       </tr>
                     )}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import Table from 'react-bootstrap/Table';
 import PropTypes from 'prop-types';
 
@@ -27,9 +28,25 @@ class StatusTable extends Component {
         >
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Submitted By</th>
-              <th>Time</th>
+              <th>
+                <FormattedMessage
+                  id="app.name"
+                  defaultMessage="Name"
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id="app.submitted-by"
+                  defaultMessage="Submitted By"
+                />
+              </th>
+              <th>
+                {' '}
+                <FormattedMessage
+                  id="app.time"
+                  defaultMessage="Time"
+                />
+              </th>
             </tr>
           </thead>
           <tbody>

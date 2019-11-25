@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import isEmpty from '../../utils/isEmpty';
 
 class TeamLeftSidebar extends Component {
@@ -18,16 +19,19 @@ class TeamLeftSidebar extends Component {
         to: `${url}`,
         path: `${url}`,
         title: 'Team Information',
+        id: 'app.teamInformation',
       },
       {
         to: `${url}/map-layer`,
         path: `${url}/map-layer`,
         title: 'Map Layers',
+        id: 'app.mapLayers',
       },
       {
         to: `${url}/subscription/team-settings`,
         path: `${url}/subscription/team-settings`,
         title: 'Account Information',
+        id: 'app.accountInformation',
       },
     ];
 
@@ -43,7 +47,11 @@ class TeamLeftSidebar extends Component {
                   : 'nav-link'
               }
             >
-              {route.title}
+              <FormattedMessage
+                id={route.id}
+                defaultMessage={route.id}
+              />
+              {/*route.title*/}
             </Link>
           </li>
         )}
@@ -57,7 +65,11 @@ class TeamLeftSidebar extends Component {
                   : 'nav-link'
               }
             >
-              {route.title}
+              <FormattedMessage
+                id={route.id}
+                defaultMessage={route.id}
+              />
+              {/*route.title*/}
             </Link>
           </li>
         )}

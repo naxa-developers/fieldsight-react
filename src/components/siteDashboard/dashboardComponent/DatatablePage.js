@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import format from 'date-fns/format';
 import uuid from 'uuid/v4';
@@ -24,7 +25,13 @@ const DatatablePage = ({
     <div className="col-xl-6 col-md-12">
       <div className="card region-table">
         <div className="card-header main-card-header sub-card-header">
-          <h5>Submissions</h5>
+          {/* <h5>Submissions</h5>*/}
+          <h5>
+            <FormattedMessage
+              id="app.submissions"
+              defaultMessage="Submissions"
+            />
+          </h5>
           {hasWritePermission && (
             <div className="add-btn">
               <a
@@ -59,11 +66,37 @@ const DatatablePage = ({
               >
                 <thead>
                   <tr>
-                    <th>Form</th>
-                    <th>Submitted By</th>
-                    <th>Reviewed By</th>
-                    <th>Status</th>
-                    <th>Submitted On</th>
+                    <th>
+                      <FormattedMessage
+                        id="app.forms"
+                        defaultMessage="Form"
+                      />
+                    </th>
+                    <th>
+                      {' '}
+                      <FormattedMessage
+                        id="app.submitted-by"
+                        defaultMessage="Submitted By"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.reviewed-by"
+                        defaultMessage="Reviewed By"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.status"
+                        defaultMessage="Status"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.submitted-on"
+                        defaultMessage="Submitted On"
+                      />
+                    </th>
                   </tr>
                 </thead>
 
@@ -99,7 +132,12 @@ const DatatablePage = ({
               </Table>
             </PerfectScrollbar>
           ) : (
-            <p> No Data Available </p>
+            <p>
+              <FormattedMessage
+                id="app.noDataAvailable"
+                defaultMessage="No Data Available"
+              />
+            </p>
           )}
 
           {showModal && (

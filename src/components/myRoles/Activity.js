@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import CustomMap from './CustomMap';
-import axios from 'axios';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
+import CustomMap from './CustomMap';
 
 let baseURL = window.base_url
   ? window.base_url
@@ -54,7 +55,12 @@ class Activity extends Component {
               className="fieldsight-btn"
             >
               <i className="fa fa-paste" />
-              <span>Select period</span>
+              <span>
+                <FormattedMessage
+                  id="app.selectPeriod"
+                  defaultMessage="Select period"
+                />
+              </span>
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="dropdown-menu-right">
@@ -70,7 +76,12 @@ class Activity extends Component {
           <div className="col-xl-4 col-md-6">
             <div className="card activity-submission">
               <div className="card-header main-card-header sub-card-header">
-                <h5>Latest Submission</h5>
+                <h5>
+                  <FormattedMessage
+                    id="app.latest-submission"
+                    defaultMessage="Latest Submission"
+                  />
+                </h5>
               </div>
               <div className="card-body">
                 <div
@@ -104,7 +115,12 @@ class Activity extends Component {
           <div className="col-xl-8 col-md-6">
             <div className="card">
               <div className="card-header main-card-header sub-card-header">
-                <h5>Map</h5>
+                <h5>
+                  <FormattedMessage
+                    id="app.map"
+                    defaultMessage="Map"
+                  />
+                </h5>
               </div>
               <div className="card-body">
                 <div id="map" style={{ height: '415px' }}>

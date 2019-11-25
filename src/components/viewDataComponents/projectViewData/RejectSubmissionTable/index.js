@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+// import PropTypes from 'prop-types';
 import StatusTable from '../../responded/StatusTable';
-import WithPagination from '../../../../hoc/WithPagination';
+// import WithPagination from '../../../../hoc/WithPagination';
 import { DotLoader } from '../../../myForm/Loader';
 
 class RejectedTable extends Component {
@@ -43,7 +44,13 @@ class RejectedTable extends Component {
     return (
       <>
         <div className="card-header main-card-header sub-card-header">
-          <h5>Rejected Submissions</h5>
+          {/*<h5>Rejected Submissions</h5>*/}
+          <h5>
+            <FormattedMessage
+              id="app.rejected-submissions"
+              defaultMessage="Rejected Submissions"
+            />
+          </h5>
           <div className="dash-btn">
             <Link to={url}>
               <button
@@ -51,7 +58,17 @@ class RejectedTable extends Component {
                 onClick={showViewData}
                 className="fieldsight-btn"
               >
-                {data ? 'View By Form' : 'View by Status'}
+                {data ? (
+                  <FormattedMessage
+                    id="app.view-by-status"
+                    defaultMessage="View By Status"
+                  />
+                ) : (
+                  <FormattedMessage
+                    id="app.view-by-status"
+                    defaultMessage="View By Status"
+                  />
+                )}
               </button>
             </Link>
           </div>

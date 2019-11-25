@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Zoom from 'react-reveal/Zoom';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import AddSite from './AddSite';
 import RegionalSiteTable from './RegionalSiteTable';
@@ -157,7 +158,13 @@ class RegionSiteList extends Component {
                         <h5>{subRegion.name}</h5>
                         <h6>{subRegion.identifier}</h6>
                         <p>
-                          <label>Total:</label>
+                          <label>
+                            <FormattedMessage
+                              id="app.total"
+                              defaultMessage="Total"
+                            />
+                            :
+                          </label>
                           {subRegion.total_sites}
                         </p>
                       </div>
@@ -184,7 +191,12 @@ class RegionSiteList extends Component {
                 <div className="popup-body lg-body">
                   <div className="card">
                     <div className="card-header main-card-header">
-                      <h5>Bulk Upload</h5>
+                      <h5>
+                        <FormattedMessage
+                          id="app.bulkUpload"
+                          defaultMessage="Bulk Upload"
+                        />
+                      </h5>
                       <span
                         tabIndex="0"
                         role="button"
@@ -207,12 +219,27 @@ class RegionSiteList extends Component {
                       >
                         <PerfectScrollbar>
                           <div className="form-group">
-                            <label>Upload file</label>
+                            <label>
+                              <FormattedMessage
+                                id="app.uploadFile"
+                                defaultMessage="Upload File"
+                              />
+                            </label>
                             <div className="upload-form">
                               <div className="upload-wrap">
                                 <div className="content">
-                                  <h3>Drag & Drop an image</h3>
-                                  <span>or</span>
+                                  <h3>
+                                    <FormattedMessage
+                                      id="app.drag&DropAnImage"
+                                      defaultMessage="Drag & Drop an image"
+                                    />
+                                  </h3>
+                                  <span>
+                                    <FormattedMessage
+                                      id="app.or"
+                                      defaultMessage="or"
+                                    />
+                                  </span>
                                 </div>
                                 <input
                                   type="file"
@@ -221,7 +248,10 @@ class RegionSiteList extends Component {
                                 />
                                 <div className="fieldsight-btn">
                                   <label htmlFor="upload-btn">
-                                    upload
+                                    <FormattedMessage
+                                      id="app.upload"
+                                      defaultMessage="Upload"
+                                    />
                                     <i className="la la-cloud-upload" />
                                   </label>
                                   <input

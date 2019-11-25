@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
@@ -175,7 +176,13 @@ class ViewData extends Component {
                 style={{ minHeight: height }}
               >
                 <div className="card-header main-card-header">
-                  <h5>View Data</h5>
+                  {/*<h5>View Data</h5>*/}
+                  <h5>
+                    <FormattedMessage
+                      id="app.view-data"
+                      defaultMessage="View Data"
+                    />
+                  </h5>
                 </div>
                 <div className="card-body">
                   <ManageFormSetting

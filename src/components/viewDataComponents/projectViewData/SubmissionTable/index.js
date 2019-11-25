@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import WithPagination from '../../../../hoc/WithPagination';
 import Modal from '../../../common/Modal';
@@ -168,12 +169,21 @@ class SubmissionData extends Component {
         </nav>
         <div className="card">
           <div className="card-header main-card-header sub-card-header">
-            <h5>Project Submissions</h5>
+            {/* <h5>Project Submissions</h5>*/}
+            <h5>
+              <FormattedMessage
+                id="app.project-submission"
+                defaultMessage="Project Submissions"
+              />
+            </h5>
             <div className="dash-btn">
               <form className="floating-form">
                 <div className="form-group mr-0">
                   <label htmlFor="input">
-                    Search
+                    <FormattedMessage
+                      id="app.teams-search"
+                      defaultMessage="Search"
+                    />
                     <input
                       type="search"
                       className="form-control"
@@ -194,12 +204,50 @@ class SubmissionData extends Component {
               >
                 <thead>
                   <tr>
-                    {!isSurvey && <th>Site Name</th>}
-                    {!isSurvey && <th>Site Id</th>}
-                    <th>submission id</th>
-                    <th>Submitted By</th>
-                    <th>Submission Date</th>
-                    <th>Action</th>
+                    {/* <th>S.N.</th>*/}
+                    {!this.state.isSurvey && (
+                      <th>
+                        <FormattedMessage
+                          id="app.site-name"
+                          defaultMessage="Site Name"
+                        />
+                      </th>
+                    )}
+                    {!this.state.isSurvey && (
+                      <th>
+                        <FormattedMessage
+                          id="app.site.id"
+                          defaultMessage="Site Id"
+                        />
+                      </th>
+                    )}
+                    <th>
+                      <FormattedMessage
+                        id="app.submission-id"
+                        defaultMessage="submission id"
+                      />
+                    </th>
+                    <th>
+                      {' '}
+                      <FormattedMessage
+                        id="app.submission-by"
+                        defaultMessage="Submission By"
+                      />
+                    </th>
+                    <th>
+                      {' '}
+                      <FormattedMessage
+                        id="app.submission-date"
+                        defaultMessage="Submission Date"
+                      />
+                    </th>
+                    <th>
+                      {' '}
+                      <FormattedMessage
+                        id="app.action"
+                        defaultMessage="Action"
+                      />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

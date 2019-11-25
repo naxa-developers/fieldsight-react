@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import SiteEditForm from '../common/siteEdit';
 import axios from 'axios';
+import SiteEditForm from '../common/siteEdit';
+// import { FormattedMessage } from "react-intl";
 
 export default class SiteEdit extends Component {
   _isMounted = false;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { GridContentLoader } from '../../common/Loader';
 /* eslint-disable react/prop-types  */
@@ -15,7 +16,11 @@ const SiteDocument = ({
       <div className="about">
         <div className="card-header main-card-header sub-card-header">
           <h5>
-            {`${termsAndLabels && termsAndLabels.site} Documents`}
+            {termsAndLabels && termsAndLabels.site} &nbsp;&nbsp;
+            <FormattedMessage
+              id="app.documents"
+              defaultMessage="Documents"
+            />
           </h5>
           {siteDocuments.length > 0 ? (
             <a
@@ -24,7 +29,10 @@ const SiteDocument = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              view all
+              <FormattedMessage
+                id="app.view-all"
+                defaultMessage="view all"
+              />
             </a>
           ) : null}
         </div>
@@ -72,7 +80,12 @@ const SiteDocument = ({
                     ))}
                   </div>
                 ) : (
-                  <p> No Documents Available </p>
+                  <p>
+                    <FormattedMessage
+                      id="app.noDocumentAvailablesss"
+                      defaultMessage="No Documents Available"
+                    />
+                  </p>
                 )}
               </div>
             </PerfectScrollbar>

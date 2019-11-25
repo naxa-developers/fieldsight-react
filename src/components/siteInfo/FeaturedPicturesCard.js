@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
+
 /* eslint-disable react/prop-types  */
 /* eslint-disable  jsx-a11y/label-has-associated-control  */
 
@@ -36,7 +38,14 @@ class FeaturedPicturesCard extends Component {
               >
                 <OverlayTrigger
                   placement="top"
-                  overlay={<Tooltip>Edit</Tooltip>}
+                  overlay={
+                    <Tooltip>
+                      <FormattedMessage
+                        id="app.edit"
+                        defaultMessage="Edit"
+                      />
+                    </Tooltip>
+                  }
                 >
                   <i className="la la-edit" />
                 </OverlayTrigger>
@@ -54,7 +63,14 @@ class FeaturedPicturesCard extends Component {
               >
                 <OverlayTrigger
                   placement="top"
-                  overlay={<Tooltip>Delete</Tooltip>}
+                  overlay={
+                    <Tooltip>
+                      <FormattedMessage
+                        id="app.delete"
+                        defaultMessage="Delete"
+                      />
+                    </Tooltip>
+                  }
                 >
                   <i className="la la-trash-o" />
                 </OverlayTrigger>
@@ -65,18 +81,36 @@ class FeaturedPicturesCard extends Component {
             <div className="before-content">
               <ul>
                 <li>
-                  <label>Type:</label>
+                  <label>
+                    <FormattedMessage
+                      id="app.type"
+                      defaultMessage="Type"
+                    />
+                    :
+                  </label>{' '}
                   <span>{picture.question_type}</span>
                 </li>
                 {picture.form_id && (
                   <li>
-                    <label>Form :</label>
+                    <label>
+                      <FormattedMessage
+                        id="app.form"
+                        defaultMessage="Form"
+                      />
+                      :
+                    </label>{' '}
                     <span>{renderName(picture.form_id)}</span>
                   </li>
                 )}
                 {picture.question && (
                   <li>
-                    <label>Question :</label>
+                    <label>
+                      <FormattedMessage
+                        id="app.question"
+                        defaultMessage="Question"
+                      />{' '}
+                      :
+                    </label>{' '}
                     <span>{picture.question.name}</span>
                   </li>
                 )}

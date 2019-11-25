@@ -28,6 +28,7 @@ const ShowCount = props => (
         countNumber={props.count}
         className={props.name}
         icon={getIcon(props.name)}
+        id={props.id}
       />
     </Link>
   </div>
@@ -44,21 +45,25 @@ class DashboardCounter extends React.PureComponent {
             name="pending"
             count={projectActivity.pending_submissions}
             link={`/project-responses/${id}/pending`}
+            id="app.pending"
           />
           <ShowCount
             name="approved"
             count={projectActivity.approved_submissions}
             link={`/project-responses/${id}/approved`}
+            id="app.approved"
           />
           <ShowCount
             name="flagged"
             count={projectActivity.flagged_submissions}
             link={`/project-responses/${id}/flagged`}
+            id="app.flagged"
           />
           <ShowCount
             name="rejected"
             count={projectActivity.rejected_submissions}
             link={`/project-responses/${id}/rejected`}
+            id="app.pending"
           />
         </div>
       </div>

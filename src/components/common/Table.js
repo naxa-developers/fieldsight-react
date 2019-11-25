@@ -28,6 +28,7 @@ export default class Table extends Component {
             className="table table-bordered dataTable"
           >
             <TableHeader tableHeader={tableHeader} />
+
             <TableRow
               tableRow={tableRow}
               page={page}

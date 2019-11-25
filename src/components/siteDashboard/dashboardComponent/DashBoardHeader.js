@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Cropper from 'react-cropper';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import Table from 'react-bootstrap/Table';
+import { FormattedMessage } from 'react-intl';
 import CountCard from '../../common/CountCard';
 import { AvatarContentLoader, DotLoader } from '../../common/Loader';
 import SubmissionModal from './SubmissionModal';
@@ -74,10 +75,12 @@ class DashboardHeader extends Component {
       {
         title: 'Generate Report',
         link: `/fieldsight/site-dashboard/${siteId}/`,
+        id: 'app.generate-report',
       },
       {
         title: 'View Data',
         link: `/fieldsight/application/#/site-responses/${siteId}/general/`,
+        id: 'app.view-data',
       },
     ];
 
@@ -95,8 +98,14 @@ class DashboardHeader extends Component {
         link: `/fieldsight/manage/people/site/${siteId}/`,
       },
       {
+        title: 'users',
+        link: `/fieldsight/manage/people/site/${siteId}/`,
+        id: 'app.users',
+      },
+      {
         title: 'forms',
         link: `/fieldsight/application/#/site/manage-forms/0/${siteId}/generalform`,
+        id: 'app.forms',
       },
     ];
 
@@ -152,7 +161,13 @@ class DashboardHeader extends Component {
                   {identifier && (
                     <div className="col-sm-8">
                       <label>
-                        <strong>Identifier:</strong>
+                        <strong>
+                          <FormattedMessage
+                            id="app.identifier"
+                            defaultMessage="Identifier"
+                          />
+                          :
+                        </strong>
                       </label>
                       &nbsp;
                       <span>{identifier}</span>
@@ -161,7 +176,13 @@ class DashboardHeader extends Component {
                   {region && (
                     <div className="col-sm-8">
                       <label>
-                        <strong>Region:</strong>
+                        <strong>
+                          <FormattedMessage
+                            id="app.region"
+                            defaultMessage="Region"
+                          />
+                          :
+                        </strong>
                       </label>
                       &nbsp;
                       <span>{region}</span>
@@ -172,7 +193,14 @@ class DashboardHeader extends Component {
                   {address && (
                     <div className="col-sm-8">
                       <label>
-                        <strong>Address:</strong>
+                        <strong>
+                          <FormattedMessage
+                            id="app.address"
+                            defaultMessage="Address"
+                            description="Address"
+                          />
+                          :
+                        </strong>
                       </label>
                       &nbsp;
                       <span>{address}</span>
@@ -181,7 +209,14 @@ class DashboardHeader extends Component {
                   {type && (
                     <div className="col-sm-8">
                       <label>
-                        <strong>Type:</strong>
+                        <strong>
+                          <FormattedMessage
+                            id="app.type"
+                            defaultMessage="Type"
+                            description="Type"
+                          />
+                          :
+                        </strong>
                       </label>
                       &nbsp;
                       <span>{type}</span>
@@ -202,7 +237,15 @@ class DashboardHeader extends Component {
                 className="fieldsight-btn"
               >
                 <i className="fa fa-paste" />
-                <span>Data</span>
+                {/* <span>Data</span>*/}
+
+                <span>
+                  <FormattedMessage
+                    id="app.data"
+                    defaultMessage="Data"
+                    description="Data"
+                  />
+                </span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="dropdown-menu-right">
@@ -212,7 +255,12 @@ class DashboardHeader extends Component {
                     key={i}
                     target="_blank"
                   >
-                    {item.title}
+                    {/*item.title*/}
+                    <FormattedMessage
+                      id={item.id}
+                      defaultMessage={item.title}
+                      description={item.title}
+                    />
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
@@ -226,7 +274,14 @@ class DashboardHeader extends Component {
                   className="fieldsight-btn"
                 >
                   <i className="fa fa-cog" />
-                  <span>Manage</span>
+                  {/*<span>Manage</span>*/}
+                  <span>
+                    <FormattedMessage
+                      id="app.manage"
+                      defaultMessage="Manage"
+                      description="Manage"
+                    />
+                  </span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu-right">
                   {HeaderDropdown.map((item, i) => (
@@ -235,7 +290,15 @@ class DashboardHeader extends Component {
                       key={i}
                       target="_blank"
                     >
-                      {item.title}
+                      {!!item.id ? (
+                        <FormattedMessage
+                          id={item.id}
+                          defaultMessage={item.title}
+                          description={item.title}
+                        />
+                      ) : (
+                        item.title
+                      )}
                     </Dropdown.Item>
                   ))}
                 </Dropdown.Menu>
@@ -297,7 +360,10 @@ class DashboardHeader extends Component {
                     openModal('Header');
                   }}
                 >
-                  add data
+                  <FormattedMessage
+                    id="app.addData"
+                    defaultMessage="Add Data"
+                  />
                   <i className="la la-plus" />
                 </a>
               </div>
@@ -334,7 +400,14 @@ class DashboardHeader extends Component {
                 >
                   <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip>Rotate Left</Tooltip>}
+                    overlay={
+                      <Tooltip>
+                        <FormattedMessage
+                          id="app.rotateLeft"
+                          defaultMessage="Rotate Left"
+                        />
+                      </Tooltip>
+                    }
                   >
                     <i className="la la-rotate-left" />
                   </OverlayTrigger>
@@ -346,7 +419,14 @@ class DashboardHeader extends Component {
                 >
                   <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip>Rotate Right</Tooltip>}
+                    overlay={
+                      <Tooltip>
+                        <FormattedMessage
+                          id="app.rotateRight"
+                          defaultMessage="Rotate Right"
+                        />
+                      </Tooltip>
+                    }
                   >
                     <i className="la la-rotate-right" />
                   </OverlayTrigger>
@@ -390,7 +470,10 @@ class DashboardHeader extends Component {
                     style={{ marginTop: '15px' }}
                     onClick={this.saveImage}
                   >
-                    Save Image
+                    <FormattedMessage
+                      id="app.saveImage"
+                      defaultMessage="Save Image"
+                    />
                   </button>
                 </div>
               </div>
@@ -415,12 +498,37 @@ class DashboardHeader extends Component {
                   >
                     <thead>
                       <tr>
-                        <th>Identifier</th>
-                        <th>Name</th>
+                        <th>
+                          <FormattedMessage
+                            id="app.identifier"
+                            defaultMessage="Identifier"
+                          />
+                        </th>
+                        <th>
+                          <FormattedMessage
+                            id="app.name"
+                            defaultMessage="Name"
+                          />
+                        </th>
 
-                        <th>Progress</th>
-                        <th>Submissions</th>
-                        <th>Type</th>
+                        <th>
+                          <FormattedMessage
+                            id="app.progress"
+                            defaultMessage="Progress"
+                          />
+                        </th>
+                        <th>
+                          <FormattedMessage
+                            id="app.submissions"
+                            defaultMessage="Submissions"
+                          />
+                        </th>
+                        <th>
+                          <FormattedMessage
+                            id="app.type"
+                            defaultMessage="Type"
+                          />
+                        </th>
                       </tr>
                     </thead>
                     <tbody>

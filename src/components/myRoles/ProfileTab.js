@@ -1,5 +1,6 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { AvatarContentLoader } from '../common/Loader';
 /* eslint-disable react/prop-types  */
 /* eslint-disable react/no-array-index-key  */
@@ -87,7 +88,10 @@ class ProfileTab extends PureComponent {
                       target="_self"
                       className="fieldsight-btn"
                     >
-                      Edit Profile
+                      <FormattedMessage
+                        id="app.edit-profile"
+                        defaultMessage="Edit Profile"
+                      />
                     </a>
                   )}
                 </div>

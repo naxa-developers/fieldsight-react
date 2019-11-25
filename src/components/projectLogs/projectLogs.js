@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import Logs from '../common/Logs';
 import { getProjectLogs } from '../../actions/projectLogsActions';
 /* eslint-disable react/prop-types  */
@@ -40,10 +41,15 @@ class ProjectLogs extends Component {
               <a
                 href={`/fieldsight/application/#/project-dashboard/${this.state.siteId}`}
               >
-                Project
+                <FormattedMessage
+                  id="app.project"
+                  defaultMessage="Project"
+                />
               </a>
             </li>
-            <li className="breadcrumb-item">Logs</li>
+            <li className="breadcrumb-item">
+              <FormattedMessage id="app.logs" defaultMessage="Logs" />
+            </li>
           </ol>
         </nav>
 

@@ -1,11 +1,14 @@
-import React, { PureComponent } from 'react';
-/* eslint-disable react/prop-types */
+import React, { Component } from 'react';
+import Modal from '../../common/Modal';
+import { FormattedMessage } from 'react-intl';
 
 const FreePlan = ({ period, plan }) => (
   <div className="col-md-4">
     <div className="module-pricing mt-4" id="pk_free">
       <div className="mp-head pbg-1">
-        <h4>Free</h4>
+        <h4>
+          <FormattedMessage id="app.free" defaultMessage="Free" />
+        </h4>
         <h3>
           <strong>{`$${plan.total_charge}`}</strong>
           <sub>{period === 'monthly' ? '/Mo' : '/Yr'}</sub>
@@ -19,29 +22,54 @@ const FreePlan = ({ period, plan }) => (
         <ul>
           <li>
             <strong>{plan.submissions}</strong>
-            Submissions
+            <FormattedMessage
+              id="app.submissions"
+              defaultMessage="Submissions"
+            />
           </li>
           <li>
             <strong>15</strong>
-            Users,
-            <strong>2</strong>
-            Projects,
-            <strong>10</strong>
-            Sites
+            <FormattedMessage id="app.users" defaultMessage="Users" />
+            ,<strong>2</strong>
+            <FormattedMessage
+              id="app.projects"
+              defaultMessage="Projects"
+            />
+            , <strong>10</strong>
+            <FormattedMessage id="app.sites" defaultMessage="Sites" />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Forms, Stages & Schedules
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.formStageSchedules"
+              defaultMessage="Forms, Stages & Schedules"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Reports, Dashboards & Maps
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.reportDashboardsMaps"
+              defaultMessage="Reports, Dashboards & Maps"
+            />
           </li>
         </ul>
       </div>
       <div className="mp-footer">
         <a title="" className="btn pbg-1 btn-block btn-lg">
-          Subscribed
+          <FormattedMessage
+            id="app.subscribed"
+            defaultMessage="Subscribed"
+          />
         </a>
       </div>
     </div>
@@ -52,7 +80,12 @@ const StarterPlan = ({ period, plan, handleSelect }) => (
   <div className="col-md-4">
     <div className="module-pricing mt-4" id="pk_starter">
       <div className="mp-head pbg-2">
-        <h4>Starter</h4>
+        <h4>
+          <FormattedMessage
+            id="app.starter"
+            defaultMessage="Starter"
+          />
+        </h4>
         <h3>
           <strong>{`$${plan.total_charge}`}</strong>
           <sub>{period === 'monthly' ? '/Mo' : '/Yr'}</sub>
@@ -66,19 +99,46 @@ const StarterPlan = ({ period, plan, handleSelect }) => (
         <ul>
           <li>
             <strong>{plan.submissions}</strong>
-            Submissions
+            <FormattedMessage
+              id="app.submissions"
+              defaultMessage="Submissions"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Users, Projects, Sites
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.userProjectSites"
+              defaultMessage="Users, Projects, Sites"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Forms, Stages & Schedules
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.formStageSchedules"
+              defaultMessage="Forms, Stages & Schedules"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Reports, Dashboards & Maps
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.reportDashboardsMaps"
+              defaultMessage="Reports, Dashboards & Maps"
+            />
           </li>
         </ul>
       </div>
@@ -91,7 +151,7 @@ const StarterPlan = ({ period, plan, handleSelect }) => (
             handleSelect('starter_plan', plan);
           }}
         >
-          Select
+          <FormattedMessage id="app.select" defaultMessage="Select" />
         </a>
       </div>
     </div>
@@ -102,7 +162,9 @@ const BasicPlan = ({ period, plan, handleSelect }) => (
   <div className="col-md-4">
     <div className="module-pricing mt-4" id="pk_basic">
       <div className="mp-head pbg-3">
-        <h4>Basic</h4>
+        <h4>
+          <FormattedMessage id="app.basic" defaultMessage="Basic" />
+        </h4>
         <h3>
           <strong>{`$${plan.total_charge}`}</strong>
           <sub>{period === 'monthly' ? '/Mo' : '/Yr'}</sub>
@@ -116,19 +178,46 @@ const BasicPlan = ({ period, plan, handleSelect }) => (
         <ul>
           <li>
             <strong>{plan.submissions}</strong>
-            Submissions
+            <FormattedMessage
+              id="app.submissions"
+              defaultMessage="Submissions"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Users, Projects, Sites
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.userProjectSites"
+              defaultMessage="Users, Projects, Sites"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Forms, Stages & Schedules
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.formStageSchedules"
+              defaultMessage="Forms, Stages & Schedules"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Reports, Dashboards & Maps
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.reportDashboardsMaps"
+              defaultMessage="Reports, Dashboards & Maps"
+            />
           </li>
         </ul>
       </div>
@@ -141,7 +230,7 @@ const BasicPlan = ({ period, plan, handleSelect }) => (
             handleSelect('basic_plan', plan);
           }}
         >
-          Select
+          <FormattedMessage id="app.select" defaultMessage="Select" />
         </a>
       </div>
     </div>
@@ -152,7 +241,12 @@ const ExtendedPlan = ({ period, plan, handleSelect }) => (
   <div className="col-md-4">
     <div className="module-pricing mt-4" id="pk_extended">
       <div className="mp-head pbg-4">
-        <h4>Extended</h4>
+        <h4>
+          <FormattedMessage
+            id="app.extended"
+            defaultMessage="Extended"
+          />
+        </h4>
         <h3>
           <strong>{`$${plan.total_charge}`}</strong>
           <sub>{period === 'monthly' ? '/Mo' : '/Yr'}</sub>
@@ -166,19 +260,46 @@ const ExtendedPlan = ({ period, plan, handleSelect }) => (
         <ul>
           <li>
             <strong>{plan.submissions}</strong>
-            Submissions
+            <FormattedMessage
+              id="app.submissions"
+              defaultMessage="Submissions"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Users, Projects, Sites
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.userProjectSites"
+              defaultMessage="Users, Projects, Sites"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Forms, Stages & Schedules
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.formStageSchedules"
+              defaultMessage="Forms, Stages & Schedules"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Reports, Dashboards & Maps
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.reportDashboardsMaps"
+              defaultMessage="Reports, Dashboards & Maps"
+            />
           </li>
         </ul>
       </div>
@@ -191,7 +312,7 @@ const ExtendedPlan = ({ period, plan, handleSelect }) => (
             handleSelect('extended_plan', plan);
           }}
         >
-          Select
+          <FormattedMessage id="app.select" defaultMessage="Select" />
         </a>
       </div>
     </div>
@@ -202,7 +323,9 @@ const ProPlan = ({ period, plan, handleSelect }) => (
   <div className="col-md-4">
     <div className="module-pricing mt-4" id="pk_pro">
       <div className="mp-head pbg-5">
-        <h4>Pro</h4>
+        <h4>
+          <FormattedMessage id="app.pro" defaultMessage="Pro" />
+        </h4>
         <h3>
           <strong>{`$${plan.total_charge}`}</strong>
           <sub>{period === 'monthly' ? '/Mo' : '/Yr'}</sub>
@@ -216,19 +339,46 @@ const ProPlan = ({ period, plan, handleSelect }) => (
         <ul>
           <li>
             <strong>{plan.submissions}</strong>
-            Submissions
+            <FormattedMessage
+              id="app.submissions"
+              defaultMessage="Submissions"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Users, Projects, Sites
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.userProjectSites"
+              defaultMessage="Users, Projects, Sites"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Forms, Stages & Schedules
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.formStageSchedules"
+              defaultMessage="Forms, Stages & Schedules"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Reports, Dashboards & Maps
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.reportDashboardsMaps"
+              defaultMessage="Reports, Dashboards & Maps"
+            />
           </li>
         </ul>
       </div>
@@ -241,7 +391,7 @@ const ProPlan = ({ period, plan, handleSelect }) => (
             handleSelect('pro_plan', plan);
           }}
         >
-          Select
+          <FormattedMessage id="app.select" defaultMessage="Select" />
         </a>
       </div>
     </div>
@@ -252,7 +402,9 @@ const ScalePlan = ({ period, plan, handleSelect }) => (
   <div className="col-md-4">
     <div className="module-pricing mt-4" id="pk_scale">
       <div className="mp-head pbg-6">
-        <h4>Scale</h4>
+        <h4>
+          <FormattedMessage id="app.scale" defaultMessage="Scale" />
+        </h4>
         <h3>
           <strong>{`$${plan.total_charge}`}</strong>
           <sub>{period === 'monthly' ? '/Mo' : '/Yr'}</sub>
@@ -266,19 +418,46 @@ const ScalePlan = ({ period, plan, handleSelect }) => (
         <ul>
           <li>
             <strong>{plan.submissions}</strong>
-            Submissions
+            <FormattedMessage
+              id="app.submissions"
+              defaultMessage="Submissions"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Users, Projects, Sites
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.userProjectSites"
+              defaultMessage="Users, Projects, Sites"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Forms, Stages & Schedules
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.formStageSchedules"
+              defaultMessage="Forms, Stages & Schedules"
+            />
           </li>
           <li>
-            <strong>Unlimited</strong>
-            Reports, Dashboards & Maps
+            <strong>
+              <FormattedMessage
+                id="app.unlimited"
+                defaultMessage="Unlimited"
+              />
+            </strong>
+            <FormattedMessage
+              id="app.reportDashboardsMaps"
+              defaultMessage="Reports, Dashboards & Maps"
+            />
           </li>
         </ul>
       </div>
@@ -291,7 +470,7 @@ const ScalePlan = ({ period, plan, handleSelect }) => (
             handleSelect('scale_plan', plan);
           }}
         >
-          Select
+          <FormattedMessage id="app.select" defaultMessage="Select" />
         </a>
       </div>
     </div>
@@ -391,18 +570,32 @@ class PricingStepOne extends PureComponent {
             <div className="pb-2" />
             <h6 className="text-center mt-4">
               <strong>
-                Thank you for signing up with FieldSight!
+                <FormattedMessage
+                  id="app.thankuMessage"
+                  defaultMessage="Thank you for signing up with FieldSight!"
+                />
               </strong>
             </h6>
             <h5 className="text-center mt-2 mb-3">
-              <strong>Select a Plan from Plan Options</strong>
+              <strong>
+                <FormattedMessage
+                  id="app.selectPlanOptions"
+                  defaultMessage="Select a Plan from Plan Options"
+                />
+              </strong>
             </h5>
             <p className="text-center mb-4 text-xlight">
-              Fees for access to the system cover the costs of hosting
-              data and providing support.
+              <FormattedMessage
+                id="app.FeesAccessSupport"
+                defaultMessage="Fees for access to the system cover the costs of hosting data and
+                  providing support."
+              />
               <br />
-              FieldSight subscription fees are charged at the start of
-              delivering service and renew automatically.
+              <FormattedMessage
+                id="app.subscriptionFees"
+                defaultMessage="FieldSight subscription fees are charged at the start of
+                  delivering service and renew automatically."
+              />
             </p>
             <div className="pb-2 text-center">
               <div
@@ -419,7 +612,10 @@ class PricingStepOne extends PureComponent {
                     handleIntervalPeriod(e);
                   }}
                 >
-                  Monthly
+                  <FormattedMessage
+                    id="app.monthly"
+                    defaultMessage="Monthly"
+                  />
                 </button>
                 <button
                   type="button"
@@ -431,7 +627,10 @@ class PricingStepOne extends PureComponent {
                     handleIntervalPeriod(e);
                   }}
                 >
-                  Yearly
+                  <FormattedMessage
+                    id="app.yearly"
+                    defaultMessage="Yearly"
+                  />
                 </button>
               </div>
             </div>
@@ -454,8 +653,11 @@ class PricingStepOne extends PureComponent {
                   className="btn btn-primary"
                   onClick={() => handleNext('second')}
                 >
-                  Next
-                  <i className="la la-long-arrow-right" />
+                  <FormattedMessage
+                    id="app.next"
+                    defaultMessage="Next"
+                  />
+                  <i className="la la-long-arrow-right"></i>
                 </button>
               </div>
             )}

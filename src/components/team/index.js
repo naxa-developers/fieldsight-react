@@ -31,6 +31,12 @@ class Teams extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.selected !== this.props.selected) {
+      localStorage.setItem('selected', this.props.selected);
+    }
+  }
+
   handleChange = async e => {
     const {
       target: { value },
@@ -72,8 +78,21 @@ class Teams extends Component {
     return (
       <>
         <div className="card">
+          <div>
+            <SelectElement
+              options={selectLanguage}
+              label="Select Language"
+              changeHandler={this.onLanguageChangeHandler}
+              value={selected}
+            />
+          </div>
           <div className="card-header main-card-header sub-card-header">
-            <h5>Team List</h5>
+            {/* <h5>Team List</h5>*/}
+            <FormattedMessage
+              id="app.team-list"
+              defaultMessage="Team List"
+              description="Team List"
+            />
             <div className="dash-btn">
               <form className="floating-form">
                 <div className="form-group mr-0">
@@ -103,7 +122,8 @@ class Teams extends Component {
                 onClick={() => this.showMap()}
               >
                 <i className="la la-map" />
-                &nbsp; Map
+                &nbsp;
+                <FormattedMessage id="app.map" defaultMessage="Map" />
               </Button>
             </div>
           </div>
@@ -117,13 +137,48 @@ class Teams extends Component {
                 >
                   <thead>
                     <tr>
-                      <th>Teams</th>
-                      <th>Address</th>
-                      <th>Projects</th>
-                      <th>Sites</th>
-                      <th> Users</th>
-                      <th>Team Owner</th>
-                      <th>Action</th>
+                      <th>
+                        <FormattedMessage
+                          id="app.teams"
+                          defaultMessage="Teams"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.address"
+                          defaultMessage="Address"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.projects"
+                          defaultMessage="Projects"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.sites"
+                          defaultMessage="Sites"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.users"
+                          defaultMessage="Users"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.team-owner"
+                          defaultMessage="Team Owner"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.action"
+                          defaultMessage="Action"
+                        />
+                      </th>
                     </tr>
                   </thead>
                   <tbody>

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
@@ -26,11 +27,38 @@ export default class SurveyFormResponseTable extends PureComponent {
                     >
                       <thead>
                         <tr>
-                          <th>sub stage name</th>
-                          <th>form name</th>
-                          <th>last response on</th>
-                          <th>Submissions</th>
-                          <th>Action</th>
+                          <th>
+                            <FormattedMessage
+                              id="app.sub-stage-name"
+                              defaultMessage="sub stage name"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.form-name"
+                              defaultMessage="Form Name"
+                            />
+                          </th>
+                          <th>
+                            {' '}
+                            <FormattedMessage
+                              id="app.last-response-on"
+                              defaultMessage="Last Response On"
+                            />
+                          </th>
+                          <th>
+                            {' '}
+                            <FormattedMessage
+                              id="app.submissions"
+                              defaultMessage="Submissions"
+                            />
+                          </th>
+                          <th>
+                            <FormattedMessage
+                              id="app.action"
+                              defaultMessage="Action"
+                            />
+                          </th>
                         </tr>
                       </thead>
                       <tbody>

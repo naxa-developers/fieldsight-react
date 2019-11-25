@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import format from 'date-fns/format';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 /* eslint-disable react/prop-types  */
@@ -30,7 +31,10 @@ class HistoryTab extends React.Component {
                         {history.get_new_status_display ===
                         'New Submission' ? (
                           <span>
-                            submitted a
+                            <FormattedMessage
+                              id="app.submitted"
+                              defaultMessage="submitted a"
+                            />
                             <strong
                               onKeyDown={this.handleKeyDown}
                               role="button"
@@ -39,13 +43,24 @@ class HistoryTab extends React.Component {
                                 getSubmissionDetail(history.url);
                               }}
                             >
-                              New version
+                              <FormattedMessage
+                                id="app.newVersion"
+                                defaultMessage="New version"
+                              />
                             </strong>
-                            of this form
+                            <FormattedMessage
+                              id="app.ofThisForm"
+                              defaultMessage="of this form"
+                            />
                           </span>
                         ) : (
                           <>
-                            <span>marked this submission as </span>
+                            <span>
+                              <FormattedMessage
+                                id="app.markedThisSubmissionAs"
+                                defaultMessage="marked this submission as"
+                              />
+                            </span>
                             <strong
                               className={history.get_new_status_display.toLowerCase()}
                             >
@@ -76,7 +91,13 @@ class HistoryTab extends React.Component {
                   </li>
                 ))
               ) : (
-                <p> No History Available </p>
+                <p>
+                  {' '}
+                  <FormattedMessage
+                    id="app.noHistoryAvailable"
+                    defaultMessage="No History Available"
+                  />{' '}
+                </p>
               )}
             </ul>
           </div>

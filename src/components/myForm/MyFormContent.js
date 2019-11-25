@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import { FormattedMessage } from 'react-intl';
 import MyformTable from './MyformTable';
 import SharedTable from './SharedTable';
 /* eslint-disable react/prop-types  */
@@ -18,7 +19,13 @@ class MyFormContent extends PureComponent {
               <div className="tab-pane fade show active">
                 <div className="card no-boxshadow">
                   <div className="card-header main-card-header sub-card-header">
-                    <h5>My Forms</h5>
+                    {/* <h5>My Forms</h5>*/}
+                    <h5>
+                      <FormattedMessage
+                        id="app.my-forms"
+                        defaultMessage="My Forms"
+                      />
+                    </h5>
                     <div className="add-btn">
                       <a
                         href={`${base_url}/forms/create/`}
@@ -26,7 +33,10 @@ class MyFormContent extends PureComponent {
                         data-tab="site-popup"
                         rel="noopener noreferrer"
                       >
-                        Create New
+                        <FormattedMessage
+                          id="app.create-new"
+                          defaultMessage="Create New"
+                        />
                         <span>
                           <i className="la la-plus" />
                         </span>
@@ -43,7 +53,13 @@ class MyFormContent extends PureComponent {
 
                 <div className="card no-boxshadow mrt-30">
                   <div className="card-header main-card-header sub-card-header">
-                    <h5>Forms Shared With Me</h5>
+                    <h5>
+                      {' '}
+                      <FormattedMessage
+                        id="app.formsSharedWithMe"
+                        defaultMessage="Forms Shared With Me"
+                      />
+                    </h5>
                   </div>
                   <div className="card-body">
                     <SharedTable

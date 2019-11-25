@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -8,6 +9,7 @@ import DeleteTable from '../deleteTable';
 import { getsiteViewData } from '../../../../actions/siteViewDataAction';
 import { DotLoader } from '../../../myForm/Loader';
 /* eslint-disable camelcase */
+
 class ManageScheduledForm extends Component {
   constructor(props) {
     super(props);
@@ -44,14 +46,36 @@ class ManageScheduledForm extends Component {
     return (
       <>
         <div className="card-header main-card-header sub-card-header">
-          <h5>{!data ? 'Schedule Forms' : 'Rejected Submission'}</h5>
+          <h5>
+            {!data ? (
+              <FormattedMessage
+                id="app.scheduled-form"
+                defaultMessage="Scheduled Forms"
+              />
+            ) : (
+              <FormattedMessage
+                id="app.rejected-submissions"
+                defaultMessage="Rejected Submission"
+              />
+            )}
+          </h5>
           <Link to={`/site-responses/${id}/rejected`}>
             <button
               type="button"
               onClick={showViewData}
               className="fieldsight-btn"
             >
-              {data ? 'View By Form' : 'View by Status'}
+              {data ? (
+                <FormattedMessage
+                  id="app.view-by-form"
+                  defaultMessage="View By Form"
+                />
+              ) : (
+                <FormattedMessage
+                  id="app.view-by-status"
+                  defaultMessage="View By Status"
+                />
+              )}
             </button>
           </Link>
         </div>
@@ -71,7 +95,12 @@ class ManageScheduledForm extends Component {
         {deleted_forms.length > 0 && !data && (
           <div className="card no-boxshadow">
             <div className="card-header main-card-header sub-card-header">
-              <h5>Deleted Forms</h5>
+              <h5>
+                <FormattedMessage
+                  id="app.deleted-forms"
+                  defaultMessage="Deleted Forms"
+                />
+              </h5>
               <div className="dash-btn">
                 {this.state.hide ? (
                   <button
@@ -79,7 +108,10 @@ class ManageScheduledForm extends Component {
                     className="btn-toggle"
                     onClick={this.toggleHide}
                   >
-                    show
+                    <FormattedMessage
+                      id="app.show"
+                      defaultMessage="Show"
+                    />
                     <div className="handle" />
                   </button>
                 ) : (
@@ -93,7 +125,10 @@ class ManageScheduledForm extends Component {
                       textAlign: 'left',
                     }}
                   >
-                    hide
+                    <FormattedMessage
+                      id="app.hide"
+                      defaultMessage="Hide"
+                    />
                     <div
                       className="handle"
                       style={{ left: 'auto', right: '0.1875rem' }}

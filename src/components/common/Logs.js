@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import uuid from 'uuid/v4';
 import { BlockContentLoader } from './Loader';
 
@@ -1090,7 +1091,10 @@ class Logs extends Component {
       <div className={fullPage ? 'col-md-12' : 'col-xl-4 col-md-12'}>
         <div className="card logs">
           <div className="card-header main-card-header sub-card-header">
-            <h5>Logs</h5>
+            {/* <h5>Logs</h5>*/}
+            <h5>
+              <FormattedMessage id="app.logs" defaultMessage="Logs" />
+            </h5>
 
             {siteLogs.length > 0 ? (
               fullPage ? null : (
@@ -1098,7 +1102,11 @@ class Logs extends Component {
                   to={`/${type}_logs/${siteId}/`}
                   className="fieldsight-btn"
                 >
-                  View all
+                  {/*View all*/}
+                  <FormattedMessage
+                    id="app.view-all"
+                    defaultMessage="View all"
+                  />
                 </Link>
               )
             ) : null}

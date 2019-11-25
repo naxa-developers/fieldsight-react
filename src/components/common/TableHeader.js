@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 const TableHeader = ({ tableHeader }) => {
   return (
@@ -6,7 +7,11 @@ const TableHeader = ({ tableHeader }) => {
       <tr>
         {tableHeader.map((header, i) => (
           <th key={i} style={{ width: '20%' }}>
-            {header}
+            {header == 'app.type' || 'app.action' || 'app.id' ? (
+              <FormattedMessage id={header} defaultMessage={header} />
+            ) : (
+              { header }
+            )}
           </th>
         ))}
       </tr>

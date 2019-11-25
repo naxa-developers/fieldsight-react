@@ -12,6 +12,7 @@
     "build": "node server"
   },
   "dependencies": {
+    "@types/npm": "^2.0.31",
     "animate.css": "^3.7.2",
     "array-move": "^2.1.0",
     "axios": "^0.19.0",

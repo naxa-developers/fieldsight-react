@@ -408,7 +408,7 @@ class ProjectWideForms extends Component {
     return (
       <div className="col-xl-9 col-lg-8">
         <RightContentCard
-          title="General Forms"
+          title="app.generate-forms"
           addButton={true}
           toggleModal={this.props.commonPopupHandler}
           showText={true}

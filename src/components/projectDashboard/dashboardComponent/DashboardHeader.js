@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import CountCard from '../../common/CountCard';
 import { AvatarContentLoader } from '../../common/Loader';
 import SubmissionModal from './SubmissionModel';
@@ -56,30 +57,39 @@ class DashboardHeader extends React.Component {
       {
         title: 'users',
         link: `/fieldsight/manage/people/project/${id}/`,
+        id: 'app.users',
       },
       // { title: "forms", link: `/forms/setup-forms/1/${id}` },
       {
         title: 'forms',
         link: `/fieldsight/application/#/project/manage-forms/1/${id}/generalform`,
+        id: 'app.forms',
       },
 
       {
         title: `${termsAndLabels && termsAndLabels.site}`,
         link: `/fieldsight/application/?project=${id}#/project-sitelist`,
+        id:
+          `${termsAndLabels && termsAndLabels.site}` == 'School'
+            ? 'app.school'
+            : `${termsAndLabels && termsAndLabels.site}`,
       },
       {
         title: `settings`,
         link: `/fieldsight/application/?project=${id}#/project-settings`,
+        id: 'app.setting',
       },
     ];
     const DataDropdown = [
       {
         title: 'Generate Report',
         link: `/fieldsight/project-dashboard/${id}/`,
+        id: 'app.generate-report',
       },
       {
         title: 'View Data',
         link: `/fieldsight/application/#/project-responses/${id}/general/`,
+        id: 'app.view-data',
       },
     ];
 
@@ -129,7 +139,14 @@ class DashboardHeader extends React.Component {
                 className="fieldsight-btn"
               >
                 <i className="la la-paste" />
-                <span>Data</span>
+                {/*<span>Data</span>*/}
+                <span>
+                  <FormattedMessage
+                    id="app.data"
+                    defaultMessage="Data"
+                    description="Data"
+                  />
+                </span>
               </Dropdown.Toggle>
               <Dropdown.Menu className="dropdown-menu-right">
                 {DataDropdown.map((item, i) => (
@@ -138,7 +155,11 @@ class DashboardHeader extends React.Component {
                     key={i}
                     target="_blank"
                   >
-                    {item.title}
+                    <FormattedMessage
+                      id={item.id}
+                      defaultMessage={item.title}
+                      description={item.title}
+                    />
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
@@ -152,7 +173,14 @@ class DashboardHeader extends React.Component {
                   className="fieldsight-btn"
                 >
                   <i className="la la-cog" />
-                  <span>Manage</span>
+                  {/*<span>Manage</span>*/}
+                  <span>
+                    <FormattedMessage
+                      id="app.manage"
+                      defaultMessage="Manage"
+                      description="Manage"
+                    />
+                  </span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu-right">
                   {ManageDropdown.map((item, i) => (
@@ -161,7 +189,11 @@ class DashboardHeader extends React.Component {
                       key={i}
                       target="_blank"
                     >
-                      {item.title}
+                      <FormattedMessage
+                        id={item.id}
+                        defaultMessage={item.title}
+                        description={item.title}
+                      />
                     </Dropdown.Item>
                   ))}
                 </Dropdown.Menu>
@@ -214,7 +246,10 @@ class DashboardHeader extends React.Component {
                   onKeyDown={() => this.setState({ openmodel: true })}
                   onClick={() => this.setState({ openmodel: true })}
                 >
-                  add data
+                  <FormattedMessage
+                    id="app.addData"
+                    defaultMessage="Add Data"
+                  />
                   <i className="la la-plus" />
                 </a>
               </div>

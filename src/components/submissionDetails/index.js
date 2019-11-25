@@ -84,7 +84,6 @@ class SubmissionDetail extends Component {
                       />
                     </div>
                   )}
-
                   <Submission
                     formName={form_name}
                     dateCreated={date_created}

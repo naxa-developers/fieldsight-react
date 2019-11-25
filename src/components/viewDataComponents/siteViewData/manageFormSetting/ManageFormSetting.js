@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 /* eslint-disable camelcase */
 
@@ -9,14 +10,22 @@ const sideNavRoutes = [
     to: '/general',
     path: '/general',
     title: 'General Forms',
+    id: 'app.generate-forms',
   },
   {
     key: 1,
     to: '/scheduled',
     path: '/scheduled',
     title: 'Scheduled Forms',
+    id: 'app.scheduled-form',
   },
-  { key: 2, to: '/stage', path: '/stage', title: 'Stage Form' },
+  {
+    key: 2,
+    to: '/stage',
+    path: '/stage',
+    title: 'Stage Form',
+    id: 'app.staged-form',
+  },
 ];
 
 const viewByStatus = [
@@ -25,24 +34,28 @@ const viewByStatus = [
     to: '/rejected',
     path: '/rejected',
     title: 'Rejected Submission',
+    id: 'app.rejected-submissions',
   },
   {
     key: 1,
     to: '/flagged',
     path: '/flagged',
     title: 'Flagged Submission',
+    id: 'app.flagged-submissions',
   },
   {
     key: 2,
     to: '/pending',
     path: '/pending',
     title: 'Pending Submission',
+    id: 'app.pending-submissions',
   },
   {
     key: 3,
     to: '/approved',
     path: '/approved',
     title: 'Approved Submission',
+    id: 'app.approved-submissions',
   },
 ];
 
@@ -70,7 +83,11 @@ class ManageFormSetting extends PureComponent {
                       : 'nav-link'
                   }
                 >
-                  {route.title}
+                  {/*route.title*/}
+                  <FormattedMessage
+                    id={route.id}
+                    defaultMessage={route.title}
+                  />
                 </Link>
               </li>
             ))}
@@ -88,7 +105,11 @@ class ManageFormSetting extends PureComponent {
                       : 'nav-link'
                   }
                 >
-                  {route.title}
+                  {/*route.title*/}
+                  <FormattedMessage
+                    id={route.id}
+                    defaultMessage={route.title}
+                  />
                 </Link>
               </li>
             ))}

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 import { AvatarContentLoader } from '../../common/Loader';
 import CountCard from '../../common/CountCard';
@@ -29,6 +30,13 @@ class DashboardHeader extends PureComponent {
         key: 0,
         title: 'users',
         link: `/fieldsight/manage/people/organization/${id}/`,
+        id: 'app.users',
+      },
+      {
+        key: 1,
+        title: 'projects',
+        link: `/fieldsight/application/#/team-projects/${id}`,
+        id: 'app.projects',
       },
       {
         key: 1,
@@ -39,6 +47,7 @@ class DashboardHeader extends PureComponent {
         key: 2,
         title: `settings`,
         link: `/fieldsight/application/#/team-settings/${id}`,
+        id: 'app.setting',
       },
     ];
 
@@ -82,7 +91,14 @@ class DashboardHeader extends PureComponent {
                 className="fieldsight-btn"
               >
                 <i className="la la-cog" />
-                <span>Manage</span>
+                {/*<span>Manage</span>*/}
+                <span>
+                  <FormattedMessage
+                    id="app.manage"
+                    defaultMessage="Manage"
+                    description="Manage"
+                  />
+                </span>
               </Dropdown.Toggle>
               <Dropdown.Menu className="dropdown-menu-right">
                 {ManageDropdown.map(item => (
@@ -91,7 +107,11 @@ class DashboardHeader extends PureComponent {
                     key={item.key}
                     target="_blank"
                   >
-                    {item.title}
+                    <FormattedMessage
+                      id={item.id}
+                      defaultMessage={item.title}
+                      description={item.title}
+                    />
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>

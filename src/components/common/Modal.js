@@ -1,5 +1,6 @@
 import React from 'react';
 import Zoom from 'react-reveal/Zoom';
+import { FormattedMessage } from 'react-intl';
 
 const Modal = ({
   title,
@@ -19,7 +20,11 @@ const Modal = ({
       >
         <div className="card">
           <div className="card-header main-card-header  sub-card-header">
-            <h5>{title}</h5>
+            <h5>
+              {/*title*/}
+
+              <FormattedMessage id={title} defaultMessage={title} />
+            </h5>
             {showButton && (
               <div
                 className="add-btn"

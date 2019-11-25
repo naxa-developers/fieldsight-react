@@ -4,6 +4,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
+import { FormattedMessage } from 'react-intl';
 import Modal from '../common/Modal';
 import InputElement from '../common/InputElement';
 import SelectElement from '../common/SelectElement';
@@ -91,7 +92,7 @@ export default class SiteAdd extends Component {
     // console.log(jsondata, "jsondata");
 
     return (
-      <RightContentCard title=" Site Form">
+      <RightContentCard title="app.siteForm">
         <div
           style={{
             display: 'flex',
@@ -107,7 +108,10 @@ export default class SiteAdd extends Component {
               style={{ boxShadow: 'none' }}
               onClick={handleDelete}
             >
-              Delete
+              <FormattedMessage
+                id="app.delete"
+                defaultMessage="Delete"
+              />
             </a>
           ) : (
             ''
@@ -120,11 +124,12 @@ export default class SiteAdd extends Component {
                 formType="editForm"
                 tag="input"
                 type="text"
-                required={true}
-                label="ID"
+                required
+                label="app.id"
                 name="site_id"
                 value={site_id}
                 changeHandler={onChangeHandler}
+                translation
               />
             </div>
             <div className="col-xl-4 col-md-6">
@@ -132,11 +137,12 @@ export default class SiteAdd extends Component {
                 formType="editForm"
                 tag="input"
                 type="text"
-                required={true}
-                label="Name"
+                required
+                label="app.name"
                 name="name"
                 value={name}
                 changeHandler={onChangeHandler}
+                translation
               />
             </div>
 
@@ -144,7 +150,7 @@ export default class SiteAdd extends Component {
               <div className="col-xl-4 col-md-6">
                 <SelectElement
                   className="form-control"
-                  label="Region"
+                  label="app.regions"
                   options={
                     !!region && region.length > 0
                       ? region.map(region => region)
@@ -154,6 +160,7 @@ export default class SiteAdd extends Component {
                     onSelectChangeHandler(e, 'regions')
                   }
                   value={regionselected}
+                  translation
                 />
               </div>
             ) : (
@@ -162,7 +169,7 @@ export default class SiteAdd extends Component {
             <div className="col-xl-4 col-md-6">
               <SelectElement
                 className="form-control"
-                label="Site Type"
+                label="app.siteType"
                 options={
                   site_types && site_types.length > 0
                     ? site_types.map(region => region)
@@ -172,6 +179,7 @@ export default class SiteAdd extends Component {
                   onSelectChangeHandler(e, 'site_types')
                 }
                 value={Selectedtypes}
+                translation
               />
             </div>
             <div className="col-xl-4 col-md-6">
@@ -180,10 +188,11 @@ export default class SiteAdd extends Component {
                 tag="input"
                 type="text"
                 required={false}
-                label="Phone"
+                label="app.phone"
                 name="phone"
                 value={phone}
                 changeHandler={onChangeHandler}
+                translation
               />
             </div>
             <div className="col-xl-4 col-md-6">
@@ -192,19 +201,21 @@ export default class SiteAdd extends Component {
                 tag="input"
                 type="text"
                 required={false}
-                label="Address"
+                label="app.address"
                 name="address"
                 value={address}
                 changeHandler={onChangeHandler}
+                translation
               />
             </div>
             <div className="col-xl-4 col-md-6">
               <div className="form-group">
                 <CheckBox
                   checked={cluster_sites || ''}
-                  label="Enable subsites"
+                  label="app.enableSubsites"
                   changeHandler={handleCheckboxChange}
                   value={cluster_sites}
+                  translation
                 />
               </div>
             </div>
@@ -215,10 +226,11 @@ export default class SiteAdd extends Component {
                   tag="input"
                   type="number"
                   required={false}
-                  label="Weight"
+                  label="app.weight"
                   name="weight"
                   value={weight}
                   changeHandler={onChangeHandler}
+                  translation
                 />
               </div>
             ) : (
@@ -231,17 +243,22 @@ export default class SiteAdd extends Component {
                   tag="input"
                   type="text"
                   required={false}
-                  label="Description"
+                  label="app.description"
                   name="public_desc"
                   value={public_desc}
                   changeHandler={onChangeHandler}
+                  translation
                 />
               </div>
             </div>
             <div className="col-xl-4 col-md-6">
               <div className="form-group">
                 <label>
-                  Map <sup>*</sup>
+                  <FormattedMessage
+                    id="app.map"
+                    defaultMessage="Map"
+                  />{' '}
+                  <sup>*</sup>
                 </label>
 
                 <div className="map-form">
@@ -257,7 +274,14 @@ export default class SiteAdd extends Component {
                     />
                     <Marker position={[latitude, longitude]}>
                       <Popup>
-                        <b>Name: </b>
+                        <b>
+                          {' '}
+                          <FormattedMessage
+                            id="app.name"
+                            defaultMessage="Name"
+                          />
+                          :{' '}
+                        </b>
                         {name}
                       </Popup>
                     </Marker>
@@ -268,13 +292,14 @@ export default class SiteAdd extends Component {
                         formType="editForm"
                         tag="input"
                         type="number"
-                        required={true}
-                        label="Latitude"
+                        required
+                        label="app.latitude"
                         name="latitude"
                         value={latitude}
                         changeHandler={e =>
                           onChangeHandler(e, 'latitude')
                         }
+                        translation
                       />
                     </div>
 
@@ -283,13 +308,14 @@ export default class SiteAdd extends Component {
                         formType="editForm"
                         tag="input"
                         type="number"
-                        required={true}
-                        label="Longitude"
+                        required
+                        label="app.longitude"
                         name="longitude"
                         value={longitude}
                         changeHandler={e =>
                           onChangeHandler(e, 'longitude')
                         }
+                        translation
                       />
                     </div>
                   </div>
@@ -301,7 +327,17 @@ export default class SiteAdd extends Component {
               <div className="form-group">
                 <label>
                   {' '}
-                  {cropResult ? 'Preview' : 'Attach File'}
+                  {cropResult ? (
+                    <FormattedMessage
+                      id="app.preview"
+                      defaultMessage="Preview"
+                    />
+                  ) : (
+                    <FormattedMessage
+                      id="app.attatchFile"
+                      defaultMessage="Attach File"
+                    />
+                  )}
                 </label>
 
                 {cropResult ? (
@@ -326,7 +362,10 @@ export default class SiteAdd extends Component {
                             <div className="upload-icon" />
 
                             <button className="fieldsight-btn">
-                              Upload
+                              <FormattedMessage
+                                id="app.upload"
+                                defaultMessage="Upload"
+                              />
                               <i className="la la-cloud-upload" />
                             </button>
                           </div>
@@ -350,9 +389,18 @@ export default class SiteAdd extends Component {
                                     multiple={false}
                                   />
                                   <div className="upload-icon" />
-                                  <h3>Drag & Drop an image</h3>
+                                  <h3>
+                                    {' '}
+                                    <FormattedMessage
+                                      id="app.drag&DropAnImage"
+                                      defaultMessage="Drag & Drop an image"
+                                    />
+                                  </h3>
                                   <button className="fieldsight-btn">
-                                    Upload
+                                    <FormattedMessage
+                                      id="app.upload"
+                                      defaultMessage="Upload"
+                                    />
                                     <i className="la la-cloud-upload" />
                                   </button>
                                 </div>
@@ -484,13 +532,16 @@ export default class SiteAdd extends Component {
                 type="submit"
                 className="fieldsight-btn pull-right"
               >
-                Save
+                <FormattedMessage
+                  id="app.save"
+                  defaultMessage="Save"
+                />
               </button>
             </div>
           </div>
         </form>
         {showCropper && (
-          <Modal title="Preview" toggleModal={closeModal}>
+          <Modal title="app.preview" toggleModal={closeModal}>
             <div className="row">
               <div className="col-md-6">
                 <div className="card-body" style={{ padding: 0 }}>
@@ -510,7 +561,10 @@ export default class SiteAdd extends Component {
                       style={{ marginTop: '15px' }}
                       onClick={this.cropImage}
                     >
-                      Save Image
+                      <FormattedMessage
+                        id="app.saveImage"
+                        defaultMessage="Save Image"
+                      />
                     </button>
                   </figure>
                 </div>
@@ -534,30 +588,14 @@ export default class SiteAdd extends Component {
         )}
 
         {deleteConfirm && (
-          <Modal
-            title={'Are you sure you want to delete ' + name + ' ?'}
-            toggleModal={deleteClose}
-          >
-            <div className="warning">
-              <h3 style={{ color: 'red' }}>Warning</h3>
-              <p>
-                All the form submissions and user roles within the
-                site will be completely removed.Do you still want to
-                continue?
-              </p>
-            </div>
-            <div className="warning-footer text-center">
-              <a
-                className="fieldsight-btn rejected-btn"
-                onClick={deleteClose}
-              >
-                cancel
-              </a>
-              <a className="fieldsight-btn" onClick={deleteFile}>
-                confirm
-              </a>
-            </div>
-          </Modal>
+          <DeleteModel
+            message="All the form submissions and user roles within the site will be
+          completely removed.Do you still want to continue?"
+            onCancel={deleteClose}
+            onConfirm={deleteFile}
+            title={`Are you sure you want to delete ${name}?`}
+            onToggle={deleteClose}
+          />
         )}
 
         {isLoading && <Loader loaded={loaded} />}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 const InputElement = ({
   tag: Tag,
@@ -13,14 +14,21 @@ const InputElement = ({
   removeBtn,
   removeHandler,
   classname,
+  translation,
   ...rest
 }) => (
   <div className={`form-group ${classname}`}>
-    {formType === 'editForm' && (
-      <label htmlFor={htmlFor}>
-        {label} {required && <sup>*</sup>}
-      </label>
-    )}
+    {formType === 'editForm' &&
+      (translation == true ? (
+        <label htmlFor={htmlFor}>
+          <FormattedMessage id={label} defaultMessage={label} />
+          {required && <sup>*</sup>}
+        </label>
+      ) : (
+        <label htmlFor={htmlFor}>
+          {label} {required && <sup>*</sup>}
+        </label>
+      ))}
 
     <Tag
       type={type}
@@ -32,9 +40,14 @@ const InputElement = ({
       {...rest}
     />
 
-    {formType === 'floatingForm' && (
-      <label htmlFor={htmlFor}>{label}</label>
-    )}
+    {formType === 'floatingForm' &&
+      (translation == true ? (
+        <label htmlFor={htmlFor}>
+          <FormattedMessage id={label} defaultMessage={label} />
+        </label>
+      ) : (
+        <label htmlFor={htmlFor}>{label}</label>
+      ))}
 
     {removeBtn && (
       <span className="cross-icon" onClick={removeHandler}>

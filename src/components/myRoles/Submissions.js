@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { BlockContentLoader } from '../common/Loader';
 /* eslint-disable react/prop-types  */
@@ -15,7 +16,14 @@ class Submissions extends PureComponent {
         {!submissionLoader && (
           <div className="thumb-list mr-0">
             <ul style={{ position: 'relative', height: '650px' }}>
-              {submission.length === 0 && <p>No Data Available</p>}
+              {submission.length === 0 && (
+                <p>
+                  <FormattedMessage
+                    id="app.noDataAvailable"
+                    defaultMessage="No Data Available"
+                  />
+                </p>
+              )}
               <PerfectScrollbar>
                 {submission.map((sub, i) => (
                   <li key={i}>
@@ -26,11 +34,17 @@ class Submissions extends PureComponent {
                     <div className="content">
                       <p>
                         <a href={sub.profile}>{sub.submitted_by}</a>
-                        submitted a response for
+                        <FormattedMessage
+                          id="app.submittedResponse"
+                          defaultMessage="submitted a response for"
+                        />
                         <a href={sub.form_url}>
                           <b>{sub.form_name}</b>
                         </a>
-                        in
+                        <FormattedMessage
+                          id="app.in"
+                          defaultMessage="in"
+                        />
                         <a href={sub.extra_object_url}>
                           <b>{sub.extra_object}</b>
                         </a>

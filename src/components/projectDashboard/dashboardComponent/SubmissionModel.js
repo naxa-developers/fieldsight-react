@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import Modal from '../../common/Modal';
 /* eslint-disable */
 
@@ -8,7 +9,12 @@ const SubmissionModal = ({ surveyData, toggleModal }) => (
       <div className="form-group">
         <ul className="nav nav-tabs ">
           <li className="nav-item">
-            <a className="nav-link">Survey Form</a>
+            <a className="nav-link">
+              <FormattedMessage
+                id="app.surveyForm"
+                defaultMessage="Survey Form"
+              />
+            </a>
           </li>
         </ul>
       </div>

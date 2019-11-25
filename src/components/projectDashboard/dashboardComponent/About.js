@@ -1,6 +1,6 @@
 import React from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-/* eslint-disable react/prop-types  */
+import { FormattedMessage } from 'react-intl';
 
 class About extends React.PureComponent {
   render() {
@@ -9,7 +9,10 @@ class About extends React.PureComponent {
       // <div className="card ">
       <div className="about">
         <div className="card-header main-card-header sub-card-header">
-          <h5>About</h5>
+          {/*<h5>About</h5>*/}
+          <h5>
+            <FormattedMessage id="app.about" defaultMessage="About" />
+          </h5>
         </div>
         <div
           className="thumb-list mr-0 "
@@ -22,7 +25,12 @@ class About extends React.PureComponent {
               </div>
               <div className="contact">
                 <div className="card-header main-card-header sub-card-header">
-                  <h5>Contacts</h5>
+                  <h5>
+                    <FormattedMessage
+                      id="app.contacts"
+                      defaultMessage="Contacts"
+                    />
+                  </h5>
                 </div>
                 <div className="card-body">
                   <ul>

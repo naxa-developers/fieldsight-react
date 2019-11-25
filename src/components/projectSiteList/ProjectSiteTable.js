@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { DotLoader } from '../myForm/Loader';
@@ -16,6 +17,29 @@ const base_url = window.base_url
   : 'https://fieldsight.naxa.com.np';
 
 const project_id = window.project_id ? window.project_id : 137;
+
+const exportSites = site => {
+  return (
+    <FormattedMessage
+      id="app.export"
+      defaultMessage="Export {name}"
+      values={{
+        name: site,
+      }}
+    />
+  );
+};
+const siteName = site => {
+  return (
+    <FormattedMessage
+      id="app.name"
+      defaultMessage="{name} Export"
+      values={{
+        name: site,
+      }}
+    />
+  );
+};
 
 class ProjectSiteTable extends Component {
   constructor(props) {
@@ -64,11 +88,21 @@ class ProjectSiteTable extends Component {
         renderPageNumbers,
       },
     } = this;
+    const { formatMessage } = this.props.intl;
 
     return (
       <>
         <div className="card-header main-card-header sub-card-header">
-          <h5>{!isEmpty(terms) ? `${terms.site}` : 'Sites'}</h5>
+          <h5>
+            {!isEmpty(terms) ? (
+              `${terms.site}`
+            ) : (
+              <FormattedMessage
+                id="app.sites"
+                defaultMessage="Sites"
+              />
+            )}
+          </h5>
           <div className="dash-btn">
             <form
               className="floating-form"
@@ -81,7 +115,9 @@ class ProjectSiteTable extends Component {
                   type="search"
                   className="form-control"
                   onChange={this.onChangeHandler}
-                  placeholder="Search"
+                  placeholder={formatMessage({
+                    id: 'app.teams-search',
+                  })}
                 />
 
                 <i className="la la-search" />
@@ -105,7 +141,10 @@ class ProjectSiteTable extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Assign Sites to Regions
+              <FormattedMessage
+                id="app.assignSitestoRegions"
+                defaultMessage="Assign Sites to Regions"
+              />
             </a>
             <a
               className="fieldsight-btn"
@@ -113,9 +152,14 @@ class ProjectSiteTable extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {!isEmpty(terms)
-                ? `Export ${terms.site} `
-                : 'Export Sites'}
+              {!isEmpty(terms) ? (
+                exportSites(terms.site)
+              ) : (
+                <FormattedMessage
+                  id="app.exportSites"
+                  defaultMessage="Export Sites"
+                />
+              )}
             </a>
             <button
               type="button"
@@ -127,7 +171,10 @@ class ProjectSiteTable extends Component {
                 );
               }}
             >
-              Bulk upload/update
+              <FormattedMessage
+                id="app.bulkUpload/update"
+                defaultMessage="Bulk upload/update"
+              />
             </button>
           </div>
         </div>
@@ -141,17 +188,58 @@ class ProjectSiteTable extends Component {
                 <thead>
                   <tr>
                     <th>
-                      {!isEmpty(terms)
-                        ? `${terms.site} Name`
-                        : 'Site Name'}
+                      {!isEmpty(terms) ? (
+                        siteName(terms.site)
+                      ) : (
+                        <FormattedMessage
+                          id="app.site-name"
+                          defaultMessage="Site Name"
+                        />
+                      )}
                     </th>
-                    <th>id</th>
-                    <th>Address</th>
-                    <th>Region</th>
-                    <th>Type</th>
-                    <th>Progress</th>
-                    <th>Submissions</th>
-                    <th>Latest status</th>
+                    <th>
+                      <FormattedMessage
+                        id="app.id"
+                        defaultMessage="Id"
+                      />
+                    </th>
+                    <th>
+                      {' '}
+                      <FormattedMessage
+                        id="app.address"
+                        defaultMessage="Address"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.region"
+                        defaultMessage="Region"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.type"
+                        defaultMessage="Type"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.progress"
+                        defaultMessage="Progress"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.submissions"
+                        defaultMessage="Submissions"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.latest-status"
+                        defaultMessage="Latest status"
+                      />
+                    </th>
                   </tr>
                 </thead>
 
@@ -294,4 +382,4 @@ class ProjectSiteTable extends Component {
     );
   }
 }
-export default withPagination(ProjectSiteTable);
+export default withPagination(injectIntl(ProjectSiteTable));

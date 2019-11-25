@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
 import { DotLoader } from '../common/Loader';
 import RightContentCard from '../common/RightContentCard';
 import Loader from '../common/Loader';
@@ -138,7 +139,10 @@ export default class MapLayer extends Component {
                   className="fieldsight-btn pull-right"
                   style={{ marginTop: '15px' }}
                 >
-                  Save
+                  <FormattedMessage
+                    id="app.save"
+                    defaultMessage="Save"
+                  />
                 </button>
               </div>
             </form>

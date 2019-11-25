@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { FormattedMessage } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { DotLoader } from '../../myForm/Loader';
 import isEmpty from '../../../utils/isEmpty';
@@ -34,10 +35,16 @@ class RegionsTable extends React.Component {
         ? [
             `${terms.region} ID`,
             `${terms.region} Name`,
-            'Created Date',
-            'Total Sites',
+            ,
+            'app.created-date',
+            'app.totalSites',
           ]
-        : ['Region ID', 'Region Name', 'Created Date', 'Total Sites'],
+        : [
+            'app.regionId',
+            'app.regionName',
+            'app.created-date',
+            'app.totalSites',
+          ],
     };
     return (
       <div className="card-body">
@@ -60,7 +67,13 @@ class RegionsTable extends React.Component {
                 ) : (
                   <tbody>
                     <tr>
-                      <td colSpan={4}>No Form Data Available</td>
+                      <td colSpan={4}>
+                        {' '}
+                        <FormattedMessage
+                          id="app.noFormDataAvailable"
+                          defaultMessage="No Form Data Available"
+                        />
+                      </td>
                     </tr>
                   </tbody>
                 )}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import axios from 'axios';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { FormattedMessage } from 'react-intl';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PreviewModal from './PreviewModal';
 import { DotLoader } from './Loader';
@@ -70,7 +71,12 @@ class ProjecTable extends Component {
       <>
         {project_list.length === 0 && !dLoader && (
           <div className="card-header main-card-header sub-card-header bg-header">
-            <h5>No Form Data Available</h5>
+            <h5>
+              <FormattedMessage
+                id="app.noFormDataAvailable"
+                defaultMessage="No Form Data Available"
+              />
+            </h5>
           </div>
         )}
         {project_list.map((item, i) => (
@@ -89,11 +95,39 @@ class ProjecTable extends Component {
                 >
                   <thead>
                     <tr>
-                      <th> S.N</th>
-                      <th>Form Name</th>
-                      <th>Create Date</th>
-                      <th>Updated date</th>
-                      <th>Action</th>
+                      <th>
+                        <FormattedMessage
+                          id="app.sn"
+                          defaultMessage="S.N"
+                        />{' '}
+                      </th>
+                      <th>
+                        {' '}
+                        <FormattedMessage
+                          id="app.form-name"
+                          defaultMessage="Form Name"
+                        />
+                      </th>
+                      <th>
+                        {' '}
+                        <FormattedMessage
+                          id="app.create-date"
+                          defaultMessage="Create Date"
+                        />
+                      </th>
+                      <th>
+                        <FormattedMessage
+                          id="app.updatedDate"
+                          defaultMessage="Updated date"
+                        />
+                      </th>
+                      <th>
+                        {' '}
+                        <FormattedMessage
+                          id="app.action"
+                          defaultMessage="Action"
+                        />
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -115,7 +149,10 @@ class ProjecTable extends Component {
                           <OverlayTrigger
                             overlay={
                               <Tooltip id="tooltip-disabled">
-                                Preview
+                                <FormattedMessage
+                                  id="app.preview"
+                                  defaultMessage="Preview"
+                                />
                               </Tooltip>
                             }
                           >
@@ -150,7 +187,10 @@ class ProjecTable extends Component {
                           <OverlayTrigger
                             overlay={
                               <Tooltip id="tooltip-disabled">
-                                Edit
+                                <FormattedMessage
+                                  id="app.edit"
+                                  defaultMessage="Edit"
+                                />
                               </Tooltip>
                             }
                           >
@@ -183,7 +223,10 @@ class ProjecTable extends Component {
                           <OverlayTrigger
                             overlay={
                               <Tooltip id="tooltip-disabled">
-                                download
+                                <FormattedMessage
+                                  id="app.download"
+                                  defaultMessage="download"
+                                />
                               </Tooltip>
                             }
                           >
@@ -194,7 +237,10 @@ class ProjecTable extends Component {
                           <OverlayTrigger
                             overlay={
                               <Tooltip id="tooltip-disabled">
-                                Make a copy
+                                <FormattedMessage
+                                  id="app.makeAcopy"
+                                  defaultMessage="Make a copy"
+                                />
                               </Tooltip>
                             }
                           >

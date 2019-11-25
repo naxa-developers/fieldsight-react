@@ -17,12 +17,12 @@ import TableRow from '../common/TableRow';
 /* eslint-disable consistent-return  */
 
 const tableHeader = [
-  'Attribute',
-  'Type',
-  'Form',
-  'Question',
-  'Project',
-  'Action',
+  'app.attribute',
+  'app.type',
+  'app.forms',
+  'app.question',
+  'app.project',
+  'app.action',
 ];
 
 const DragHandle = sortableHandle(({ each, index }) => (

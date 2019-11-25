@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { AvatarContentLoader } from '../../common/Loader';
 /* eslint-disable react/prop-types */
@@ -49,7 +50,12 @@ class Admin extends PureComponent {
                       />
                     ))
                   ) : (
-                    <p> No Data Available </p>
+                    <p>
+                      <FormattedMessage
+                        id="app.noDataAvailable"
+                        defaultMessage="No Data Available"
+                      />
+                    </p>
                   )}
                 </ul>
               </PerfectScrollbar>

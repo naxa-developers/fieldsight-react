@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
+import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import WithPagination from '../../../../hoc/WithPagination';
@@ -149,7 +150,13 @@ class SubmissionData extends Component {
         </nav>
         <div className="card">
           <div className="card-header main-card-header sub-card-header">
-            <h5>Site Submissions</h5>
+            {/*<h5>Site Submissions</h5>*/}
+            <h5>
+              <FormattedMessage
+                id="app.site-submissions"
+                defaultMessage="Site Submissions"
+              />
+            </h5>
             <div className="dash-btn">
               <form className="floating-form">
                 <div className="form-group mr-0">
@@ -177,10 +184,31 @@ class SubmissionData extends Component {
               >
                 <thead>
                   <tr>
-                    <th>submission id</th>
-                    <th>Submitted By</th>
-                    <th>Submission Date</th>
-                    <th>Action</th>
+                    {/*<th>S.N.</th>*/}
+                    <th>
+                      <FormattedMessage
+                        id="app.submission-id"
+                        defaultMessage="submission id"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.submission-by"
+                        defaultMessage="Submission By"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.submission-date"
+                        defaultMessage="Submission Date"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.action"
+                        defaultMessage="Action"
+                      />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

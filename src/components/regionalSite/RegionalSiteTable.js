@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
+import { FormattedMessage } from 'react-intl';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { TableContentLoader } from '../common/Loader';
@@ -104,16 +105,51 @@ class RegionalSiteTable extends Component {
                 <thead>
                   <tr>
                     <th>
-                      {!isEmpty(terms)
-                        ? `${terms.site} name`
-                        : 'Site name'}
+                      {!isEmpty(this.props.terms) ? (
+                        `${this.props.terms.site} name`
+                      ) : (
+                        <FormattedMessage
+                          id="app.site-name"
+                          defaultMessage="Site name"
+                        />
+                      )}
                     </th>
-                    <th>identifier</th>
-                    <th>Address</th>
-                    <th>type</th>
-                    <th>Progress</th>
-                    <th>Submissions</th>
-                    <th>Latest status</th>
+                    <th>
+                      <FormattedMessage
+                        id="app.identifier"
+                        defaultMessage="Identifier"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.address"
+                        defaultMessage="Address"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.type"
+                        defaultMessage="Type"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.progress"
+                        defaultMessage="Progress"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.submissions"
+                        defaultMessage="Submissions"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.latest-status"
+                        defaultMessage="Latest status"
+                      />
+                    </th>
                   </tr>
                 </thead>
 

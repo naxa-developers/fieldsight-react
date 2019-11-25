@@ -3,6 +3,7 @@ import Table from './common/Table';
 import Modal from './common/Modal';
 import InputElement from './common/InputElement';
 import RightContentCard from './common/RightContentCard';
+import { FormattedMessage } from 'react-intl';
 
 class SiteManage extends Component {
   constructor(props) {
@@ -43,45 +44,53 @@ class SiteManage extends Component {
                 tag="input"
                 type="text"
                 required={true}
-                label="ID"
+                label="app.id"
                 formType="floatingForm"
                 htmlFor="input"
+                translation={true}
               />
               <InputElement
                 tag="input"
                 type="text"
                 required={true}
-                label="Sites"
+                label="app.sites"
                 formType="floatingForm"
                 htmlFor="input"
+                translation={true}
               />
               <InputElement
                 tag="input"
                 type="text"
                 required={true}
-                label="Address"
+                label="app.address"
                 formType="floatingForm"
                 htmlFor="input"
+                translation={true}
               />
               <InputElement
                 tag="input"
                 type="text"
                 required={true}
-                label="Regions"
+                label="app.regions"
                 formType="floatingForm"
                 htmlFor="input"
+                translation={true}
               />
               <InputElement
                 tag="input"
                 type="text"
                 required={true}
-                label="Status"
+                label="app.status"
                 formType="floatingForm"
                 htmlFor="input"
+                translation={true}
               />
               <div className="form-group pull-right no-margin">
                 <button type="submit" className="fieldsight-btn">
-                  Save
+                  <FormattedMessage
+                    id="app.save"
+                    defaultMessage="Save"
+                  />
                 </button>
               </div>
             </form>

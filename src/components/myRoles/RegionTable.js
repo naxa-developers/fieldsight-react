@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import Table from 'react-bootstrap/Table';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { TableContentLoader } from '../common/Loader';
 /* eslint-disable react/prop-types  */
 /* eslint-disable react/no-array-index-key  */
@@ -27,12 +28,39 @@ class RegionTable extends PureComponent {
               >
                 <thead>
                   <tr>
-                    <th>identifier</th>
-                    <th>name</th>
-                    <th>total_sites</th>
-                    <th>Role</th>
+                    <th>
+                      <FormattedMessage
+                        id="app.identifier"
+                        defaultMessage="identifier"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.name"
+                        defaultMessage="Name"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.totalSites"
+                        defaultMessage="Total Sites"
+                      />
+                    </th>
+                    <th>
+                      <FormattedMessage
+                        id="app.role"
+                        defaultMessage="Role"
+                      />
+                    </th>
 
-                    {profileId && <th>Action</th>}
+                    {this.props.profileId && (
+                      <th>
+                        <FormattedMessage
+                          id="app.action"
+                          defaultMessage="Action"
+                        />
+                      </th>
+                    )}
                   </tr>
                 </thead>
 
@@ -62,7 +90,12 @@ class RegionTable extends PureComponent {
                 </tbody>
               </Table>
             ) : (
-              <p>You do not have any region.</p>
+              <p>
+                <FormattedMessage
+                  id="app.noRegion."
+                  defaultMessage="You do not have any region."
+                />
+              </p>
             )}
           </PerfectScrollbar>
         )}
